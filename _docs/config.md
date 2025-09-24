@@ -1,0 +1,2 @@
+
+::: thkit.config

@@ -1,0 +1,24 @@
+### https://github.com/alstr/todo-to-issue-action
+
+name: "Run TODO to Issue"
+
+on:
+  push:
+    branches: [dev] # use single branch to avoid duplicate issues
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: read      # allow checkout
+      issues: write       # allow creating issues
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: "TODO to Issue"
+        uses: "alstr/todo-to-issue-action@v5"
+        with:
+          PROJECT: "user/thangckt/alff"
+          PROJECTS_SECRET: "${{ secrets.PROJECTS_SECRET }}"
+          # AUTO_ASSIGN: "true"

@@ -1,0 +1,6 @@
+# Schema to configure remote machines
+
+In the below schema, the [machine](https://docs.deepmodeling.com/projects/dpdispatcher/en/latest/machine.html) and [resources](https://docs.deepmodeling.com/projects/dpdispatcher/en/latest/resources.html) dicts accept all keywords as in the [dpdispatcher](https://docs.deepmodeling.com/projects/dpdispatcher) package
+
+- Support romote machines of various [batch types](https://docs.deepmodeling.com/projects/dpdispatcher/en/latest/batch.html): Bash, Slurm, OpenPBS, SGE, TORQUE, LSF, OpenAPI, ...
+- Support various connection [contexts](https://docs.deepmodeling.com/projects/dpdispatcher/en/latest/context.html): Local, SSH, HDFS, OpenAPI, ...
