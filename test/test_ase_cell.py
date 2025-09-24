@@ -5,8 +5,8 @@ import numpy as np
 import pytest
 from ase import Atoms
 from ase.test.calculator.lammps.test_prism import make_array
-from asext.ase_cell import AseCell, CellTransform
-from asext.ase_struct import check_bad_box
+from asext.cell import AseCell, CellTransform
+from asext.struct import check_bad_box
 from numpy.testing import assert_allclose
 
 

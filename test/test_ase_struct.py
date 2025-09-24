@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from ase import Atoms
 from ase.build import bulk
-from asext.ase_struct import set_vacuum
+from asext.struct import set_vacuum
 
 # TODO: Add all tests for ase_struct.py
 

@@ -9,8 +9,7 @@ from copy import deepcopy
 
 import numpy as np
 
-# from asext.ase_struct import align_struct_min_pos
-from alff.util.key import FILE_FRAME_unLABEL
+# from asext.struct import align_struct_min_pos
 from ase.cell import Cell
 from ase.io import read, write
 
@@ -234,30 +233,6 @@ def rotate_struct_property(
             assert tensor.shape == (3, 3), f"Tensor property {prop} must be a 3x3 matrix."
             struct.info[prop] = rot.tensor_forward(tensor)
     return struct
-
-
-#####ANCHOR helper functions for sorting tasks
-def sort_task_dirs(task_dirs: list[str], work_dir: str) -> list[str]:
-    """Sort the structure paths by its supercell size.
-    This helps to chunk the tasks with similar supercell size together (similar supercell size means similar k-point number), which then lead to running DFT calculations in similar time, avoiding the situation that some tasks are finished while others are still running.
-    """
-    structure_dirs = [f"{work_dir}/{p}/{FILE_FRAME_unLABEL}" for p in task_dirs]
-    struct_list = [(read(f, format="extxyz", index=-1)) for f in structure_dirs]
-
-    atom_counts = [len(atoms) for atoms in struct_list]
-    periodic_len = [
-        sum(length for length, pbc in zip(atoms.cell.lengths(), atoms.pbc) if pbc)
-        for atoms in struct_list
-    ]
-
-    ### Convert to NumPy arrays for sorting
-    atom_counts_array = np.array(atom_counts)
-    periodic_len_array = np.array(periodic_len)
-
-    ### Sort indices first by 'number of atoms', then by 'periodic length'
-    sorted_indices = np.lexsort((periodic_len_array, atom_counts_array))
-    sorted_task_dirs = [task_dirs[i] for i in sorted_indices]
-    return sorted_task_dirs
 
 
 #####ANCHOR functions from other sources

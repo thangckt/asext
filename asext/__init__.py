@@ -6,12 +6,9 @@ Python package extends functions of ASE (Atomic Simulation Environment).
 Developed and maintained by [C.Thang Nguyen](https://thangckt.github.io)
 """
 
-# from .check_installation import *
-# from .general_utils import *
-
 from pathlib import Path
 
-THKIT_ROOT = Path(__file__).parent
+ASEXT_ROOT = Path(__file__).parent
 
 try:
     from ._version import version as __version__
