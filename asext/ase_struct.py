@@ -12,6 +12,7 @@ from pathlib import Path
 
 import numpy as np
 import polars as pl
+from alff.util.key import SCHEMA_ASE_BUILD
 from ase import units
 from ase.calculators.lammps import Prism
 from ase.calculators.singlepoint import SinglePointCalculator
@@ -20,8 +21,7 @@ from ase.io.lammpsdata import write_lammps_data
 from thkit.config import validate_config
 from thkit.io import read_yaml, write_yaml
 
-from alff.util.ase_cell import rotate_struct_property
-from alff.util.key import SCHEMA_ASE_BUILD
+from asext.ase_cell import rotate_struct_property
 
 
 #####ANCHOR ASE build structure

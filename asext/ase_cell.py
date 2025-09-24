@@ -8,11 +8,11 @@ if TYPE_CHECKING:
 from copy import deepcopy
 
 import numpy as np
+
+# from asext.ase_struct import align_struct_min_pos
+from alff.util.key import FILE_FRAME_unLABEL
 from ase.cell import Cell
 from ase.io import read, write
-
-# from alff.util.ase_struct import align_struct_min_pos
-from alff.util.key import FILE_FRAME_unLABEL
 
 
 #####ANCHOR ASE new_cell

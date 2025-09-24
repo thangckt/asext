@@ -3,37 +3,29 @@ requires = ["setuptools>=64", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "thkit"
+name = "asext"
 dynamic = ["version"]
-description = "The Python package of general ulitities."
+description = "Python package extends functions of ASE (Atomic Simulation Environment)"
 authors = [{ name = "C.Thang Nguyen", email = "sth@sth.com" }]
 license = { file = "LICENSE.md" }
 
 requires-python = ">=3.9"
-dependencies = [
-    'pyyaml',
-    'requests',
-    "cerberus",
-    "omegaconf",
-    # 'dpdispatcher',
-    'dpdispatcher@git+https://github.com/thangckt/dpdispatcher@master',
-    # dpdispatcher@git+https://github.com/deepmodeling/dpdispatcher@master,
-]
+dependencies = ['ase', 'numpy']
 
 [project.optional-dependencies]
 test = ['pytest', 'pytest-cov', 'numpy']
 bare = []
 
 [tool.setuptools_scm]
-write_to = "thkit/_version.py"
+write_to = "asext/_version.py"
 version_scheme = "python-simplified-semver"
 local_scheme = "no-local-version"
 fallback_version = "0.1.0"
 
 [tool.setuptools.packages.find]
-include = ["thkit*"]
+include = ["asext*"]
 exclude = ["1devtool*", "_docs*"]
 
 
 [tool.setuptools.package-data]
-# thkit = ['_cookie_file/*']
+# asext = ['_cookie_file/*']
