@@ -64,24 +64,6 @@ jobs:
           pip install build
           python -m build --wheel
 
-      # - name: Check mismatch version
-      #   run: |
-      #     pip install packaging
-      #     TAG=$(git describe --tags "$(git rev-list --tags --max-count=1)" | sed 's/^v//')
-      #     WHL=$(ls dist/*.whl | head -n1)
-      #     WHEEL_VER=$(unzip -p "$WHL" *.dist-info/METADATA | grep -m1 ^Version: | cut -d' ' -f2)
-      #     if [ -z "$WHEEL_VER" ]; then
-      #       echo "ERROR: Could not extract version from $WHL"
-      #       exit 1
-      #     fi
-
-      #     echo "Git tag: $TAG"
-      #     echo "Wheel version: $WHEEL_VER"
-
-      #     python -c "from packaging.version import Version; import sys; \
-      #     wheel, tag = Version('$WHEEL_VER'), Version('$TAG'); \
-      #     sys.exit(f'Wheel version {wheel} < Tag {tag}' if wheel < tag else 0)"
-
       - name: Upload wheel to public PyPI repo
         uses: pypa/gh-action-pypi-publish@release/v1
               # with:
