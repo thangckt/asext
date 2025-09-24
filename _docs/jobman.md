@@ -15,8 +15,8 @@ To use, just need to:
 - Use function [submit_job_chunk()](#submit_job_chunk) to submit jobs to remote machines.
 
 ```python
-from thkit.jobman.submit import submit_job_chunk, Task
-from thkit.jobman.helper import loadconfig_multi_machines
+from asext.jobman.submit import submit_job_chunk, Task
+from asext.jobman.helper import loadconfig_multi_machines
 
 mdict_list = loadconfig_multi_machines("MACHINE.yml")  # load the remote machine config
 mdict = mdict_list[0]  # use the first machine in the list
@@ -49,7 +49,7 @@ task = Task.load_from_dict(
 task_list = [task]
 ```
 
-2. Info 2: Configure the remote machine in `MACHINE.yml` file, following the [remote machine schema](https://thangckt.github.io/thkit_doc/schema_doc/config_remotes/).
+2. Info 2: Configure the remote machine in `MACHINE.yml` file, following the [remote machine schema](https://thangckt.github.io/asext_doc/schema_doc/config_remotes/).
 
 3. (Optional) Use a launcher script (e.g., `launcher.sh`) to run python code
 
@@ -73,8 +73,8 @@ This is used for specific purpose (e.g., `alff` package), where the jobs have th
 - Define a `prepare_command_list()` function to prepare the command_list for each remote machine.
 
 ```python
-from thkit.jobman.submit import alff_submit_job_multi_remotes
-from thkit.config import loadconfig
+from asext.jobman.submit import alff_submit_job_multi_remotes
+from asext.config import loadconfig
 import asyncio
 
 mdict = loadconfig("remote_machine.yml")  # load the remote machine config
@@ -104,11 +104,11 @@ asyncio.run(
 ```
 
 Note:
-    - Setting remote machines follow the [remote machine schema](https://thangckt.github.io/thkit_doc/schema_doc/config_remote_machine/).
+    - Setting remote machines follow the [remote machine schema](https://thangckt.github.io/asext_doc/schema_doc/config_remote_machine/).
     - Can import from `jobman` these classes: [Task](https://docs.deepmodeling.com/projects/dpdispatcher/en/latest/task.html), [Machine](https://docs.deepmodeling.com/projects/dpdispatcher/en/latest/machine.html), [Resources](https://docs.deepmodeling.com/projects/dpdispatcher/en/latest/resources.html), [Submission](https://docs.deepmodeling.com/projects/dpdispatcher/en/latest/api/dpdispatcher.html#dpdispatcher.Submission).
     - To handle if some tasks is finished and some tasks are not finished, see the function [handle_submission()](https://github.com/deepmodeling/dpdispatcher/blob/d55b3c3435a6b4cb8e200682a39a3418fd04d922/dpdispatcher/entrypoints/submission.py#L9)
 
 
 API Reference:
 
-::: thkit.jobman
+::: asext.jobman

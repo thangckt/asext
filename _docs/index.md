@@ -1,5 +1,5 @@
-# `thkit` Documentation
+# `asext` Documentation
 
-::: thkit
+::: asext
     options:
         members: false

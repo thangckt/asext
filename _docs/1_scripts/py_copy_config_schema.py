@@ -1,4 +1,4 @@
-from thkit import THKIT_ROOT
+from asext import asext_ROOT
 
 
 def append_schema_text(md_file: str, yaml_schema_file: str):
@@ -31,12 +31,12 @@ def main():
     ### Append schema to the .md files
     append_schema_text(
         md_file="./_docs/schema_doc/config_remotes.md",
-        yaml_schema_file=f"{THKIT_ROOT}/jobman/schema/schema_machine.yml",
+        yaml_schema_file=f"{asext_ROOT}/jobman/schema/schema_machine.yml",
     )
     ### Append example configuration to the .md files
     append_example_config(
         md_file="./_docs/schema_doc/config_remotes.md",
-        config_files=[f"{THKIT_ROOT}/jobman/schema/sampleConfig_machine_single.yml"],
+        config_files=[f"{asext_ROOT}/jobman/schema/sampleConfig_machine_single.yml"],
     )
     return
 

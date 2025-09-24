@@ -1,4 +1,4 @@
-### This action build pure-Python wheels and push to repo: thangckt/thkit_doc
+### This action build pure-Python wheels and push to repo: thangckt/asext_doc
 ### Then use action `pypa/gh-action-pypi-publish@release/v1` in that repo to upload to pypi
 
 name: Build pure-Python wheels and upload wheel file to PyPI

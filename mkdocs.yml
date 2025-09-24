@@ -179,7 +179,7 @@ nav:
   - home: http://thangckt.github.io
   - alff: http://thangckt.github.io/alff_doc
 
-  - thkit: http://thangckt.github.io/thkit_doc
+  - asext: http://thangckt.github.io/asext_doc
   - thase:
       - About: index.md
       # - Modules:

@@ -1,2 +1,2 @@
 
-::: thkit.config
+::: asext.config

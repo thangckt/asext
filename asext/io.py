@@ -16,7 +16,7 @@ from ase.calculators.lammps import Prism
 from ase.calculators.singlepoint import SinglePointCalculator
 from ase.io import read, write
 from ase.io.lammpsdata import write_lammps_data
-from thkit.io import read_yaml, write_yaml  # noqa
+from asext.io import read_yaml, write_yaml  # noqa
 
 from asext.cell import rotate_struct_property
 
