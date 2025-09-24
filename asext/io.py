@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from ase.atoms import Atoms
 
-
 from glob import glob
 from pathlib import Path
 
@@ -16,9 +15,9 @@ from ase.calculators.lammps import Prism
 from ase.calculators.singlepoint import SinglePointCalculator
 from ase.io import read, write
 from ase.io.lammpsdata import write_lammps_data
-from asext.io import read_yaml, write_yaml  # noqa
 
 from asext.cell import rotate_struct_property
+from asext.io import read_yaml, write_yaml  # noqa
 
 
 #####ANCHOR: ASE convert file formats

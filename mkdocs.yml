@@ -178,9 +178,8 @@ plugins:
 nav:
   - home: http://thangckt.github.io
   - alff: http://thangckt.github.io/alff_doc
-
-  - asext: http://thangckt.github.io/asext_doc
-  - thase:
+  - thkit: http://thangckt.github.io/thkit_doc
+  - asext:
       - About: index.md
       - Modules:
         - cell: cell.md
