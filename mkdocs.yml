@@ -182,18 +182,18 @@ nav:
   - asext: http://thangckt.github.io/asext_doc
   - thase:
       - About: index.md
-      # - Modules:
-      #   - jobman: jobman.md
-      #   - config: config.md
-      #   - io: io.md
+      - Modules:
+        - cell: cell.md
+        - struct: struct.md
+        - io: io.md
       #   - path: path.md
       #   - pkg: pkg.md
       #   - stuff: stuff.md
 
       # - Schema:
       #   - Schema for remote machines: schema_doc/config_remotes.md
-      # - API: api.md
-      # # - Changelog: CHANGELOG.md
+      - API: api.md
+      # - Changelog: CHANGELOG.md
 
   - thmd: http://thangckt.github.io/thmd_doc
   - thml: http://thangckt.github.io/thml_doc
