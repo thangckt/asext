@@ -16,7 +16,7 @@ from ase.calculators.singlepoint import SinglePointCalculator
 from ase.io import read, write
 
 from asext.cell import rotate_struct_property
-from asext.io.lmpdata import _get_symbols_by_types, read_lmpdump_text, write_lammps_data
+from asext.io.lmpdata import _get_symbols_by_types, read_lammps_dump_text, write_lammps_data
 
 
 #####ANCHOR: Read/Write extxyz file
@@ -67,7 +67,7 @@ def read_lmpdump(lmpdump_file: str, index=-1, units="metal", **kwargs) -> list[A
     Returns:
         list: List of Atoms object.
     """
-    struct_list = read_lmpdump_text(lmpdump_file, index=index, units=units, **kwargs)
+    struct_list = read_lammps_dump_text(lmpdump_file, index=index, units=units, **kwargs)
     if not isinstance(struct_list, list):  ### Ensure the result is always a list
         struct_list = [struct_list]
     return struct_list
@@ -190,6 +190,7 @@ def lmpdata2extxyz(lmpdata_file: str, extxyz_file: str, original_cell_file: str 
 def lmpdump2extxyz(
     lmpdump_file: str,
     extxyz_file: str,
+    index: int | slice = -1,
     original_cell_file: str = None,
     stress_file: str = None,
     lammps_units: str = "metal",
@@ -220,7 +221,7 @@ def lmpdump2extxyz(
         old_cell = np.loadtxt(original_cell_file)
 
     ###
-    struct_list = read_lmpdump(lmpdump_file, index=":", units=lammps_units)
+    struct_list = read_lmpdump(lmpdump_file, index=index, units=lammps_units)
     new_struct_list = [None] * len(struct_list)
     for i, struct in enumerate(struct_list):
         ### init calc if not exist

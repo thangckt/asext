@@ -246,7 +246,7 @@ def read_lammps_dump_text(file: str, index=-1, **kwargs):
 
 
 #####ANCHOR: Write LAMMPS DATA file
-def write_lammmps_data(
+def write_lammps_data(
     file: str,
     atoms: Atoms,
     *,
