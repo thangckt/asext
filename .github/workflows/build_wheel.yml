@@ -1,7 +1,6 @@
-### This action build pure-Python wheels and push to repo: thangckt/asext_doc
-### Then use action `pypa/gh-action-pypi-publish@release/v1` in that repo to upload to pypi
+### This action build pure-Python wheels
 
-name: Build pure-Python wheels and upload wheel file to PyPI
+name: build_wheel_purepython
 
 on:
   workflow_dispatch:
@@ -14,13 +13,10 @@ on:
 
 
 jobs:
-  ### Build wheel file and upload to public repo
+  ### Build wheel file
   build_wheel:
-    name: Build wheel file and upload to public repo
+    name: Build wheel file
     runs-on: ubuntu-latest
-    environment: pypi
-    permissions:
-      id-token: write
 
     ### Only trigger if the commit message starts with 'r:' or 'dev:'
     if: >
@@ -63,9 +59,3 @@ jobs:
         run: |
           pip install build
           python -m build --wheel
-
-      - name: Upload wheel to public PyPI repo
-        uses: pypa/gh-action-pypi-publish@release/v1
-              # with:
-                # To test: repository-url: https://test.pypi.org/legacy/
-                # path: dist/
