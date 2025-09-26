@@ -1,6 +1,9 @@
-### This action build pure-Python wheels
+### https://github.com/orgs/community/discussions/49742
+### This action have 2 steps, which step 2 depends on step 1
+#     1. build pure-Python wheels
+#     2. upload to PyPI
 
-name: build_wheel_purepython
+name: build wheel and upload to PyPI
 
 on:
   workflow_dispatch:
@@ -13,8 +16,7 @@ on:
 
 
 jobs:
-  ### Build wheel file
-  build_wheel:
+  build_wheel:       ### Build wheel file
     name: Build wheel file
     runs-on: ubuntu-latest
 
@@ -59,3 +61,19 @@ jobs:
         run: |
           pip install build
           python -m build --wheel
+
+  upload_pypi:      ### Upload to PyPI
+    needs: build_wheel
+    name: Upload to PyPI
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        # with:
+          # To test: repository-url: https://test.pypi.org/legacy/
+          # path: dist/
