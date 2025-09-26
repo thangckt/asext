@@ -1,0 +1,9 @@
+ase
+numpy
+
+[bare]
+
+[test]
+pytest
+pytest-cov
+numpy
