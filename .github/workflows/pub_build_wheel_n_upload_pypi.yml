@@ -1,9 +1,4 @@
-### https://github.com/orgs/community/discussions/49742
-### This action have 2 steps, which step 2 depends on step 1
-#     1. build pure-Python wheels
-#     2. upload to PyPI
-
-### Note: In GitHub Actions each job runs in a fresh, isolated environment. The (build_wheel) creates the wheel in dist/, but when the second job (upload_pypi) runs, that dist/ folder is gone because it was not passed between jobs. Need to use `actions/upload-artifact` / `actions/download-artifact`
+### REF: https://github.com/pypa/gh-action-pypi-publish
 
 name: build wheel and upload to PyPI
 
@@ -64,30 +59,8 @@ jobs:
           pip install build
           python -m build --wheel
 
-      - name: Upload folder `dist/` as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist
-
-  upload_pypi:      ### Upload to PyPI
-    needs: build_wheel
-    name: Upload to PyPI
-    runs-on: ubuntu-latest
-    environment: pypi
-    permissions:
-      id-token: write
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download `dist/` artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist
-
-      - uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
         # with:
           # To test: repository-url: https://test.pypi.org/legacy/
           # path: dist/
