@@ -13,8 +13,8 @@ requires-python = ">=3.9"
 dependencies = ['ase', 'numpy']
 
 [project.optional-dependencies]
-test = ['pytest', 'pytest-cov', 'numpy']
 bare = []
+test = ['pytest', 'pytest-cov', 'numpy']
 
 [tool.setuptools_scm]
 write_to = "asext/_version.py"
