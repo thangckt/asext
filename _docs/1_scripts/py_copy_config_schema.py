@@ -39,7 +39,3 @@ def main():
         config_files=[f"{asext_ROOT}/jobman/schema/sampleConfig_machine_single.yml"],
     )
     return
-
-
-# if __name__ == "__main__":
-#     main()

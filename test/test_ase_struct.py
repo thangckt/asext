@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 from ase import Atoms
 from ase.build import bulk
+
 from asext.struct import set_vacuum
 
 # TODO: Add all tests for ase_struct.py
@@ -13,8 +14,7 @@ class TestAddVacuum:
         # Add vacuum along each direction
         distances = [7.0, 5.0, 6.0]
         new_struct = set_vacuum(struct, distances)
-        # The new cell should be [7.0, 4.0, 6.0]
-        new_cell = new_struct.cell.array
+        new_cell = new_struct.cell.array  # The new cell should be [7.0, 5.0, 6.0]
         assert np.allclose(np.diag(new_cell), [7.0, 5.0, 6.0], atol=1e-6)
         # Atoms should be centered within the vacuum
         center = new_struct.get_center_of_mass()

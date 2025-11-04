@@ -21,7 +21,7 @@ from asext.io.lmpdata import _get_symbols_by_types, read_lammps_dump_text, write
 
 #####ANCHOR: Read/Write extxyz file
 def read_extxyz(extxyz_file: str, index=":") -> list[Atoms]:
-    """Read extxyz file. The exited `ase.io.read` returns a single Atoms object if file contains only one frame. This function will return a list of Atoms object.
+    """Read extxyz file. The existing `ase.io.read` returns a single Atoms object if file contains only one frame. This function will return a list of Atoms object.
 
     Args:
         extxyz_file (str): Path to the output file.
@@ -42,7 +42,7 @@ def read_extxyz(extxyz_file: str, index=":") -> list[Atoms]:
 
 
 def write_extxyz(outfile: str, structs: list[Atoms]) -> None:
-    """Write a list of Atoms object to an extxyz file. The exited `ase.io.write` function does not support writing file if the parent directory does not exist. This function will overcome this problem.
+    """Write a list of Atoms object to an extxyz file. The existing `ase.io.write` function does not support writing file if the parent directory does not exist. This function will overcome this problem.
 
     Args:
         structs (list): List of Atoms object.
