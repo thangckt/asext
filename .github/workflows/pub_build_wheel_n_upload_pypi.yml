@@ -1,0 +1,69 @@
+### REF: https://github.com/pypa/gh-action-pypi-publish
+
+name: build wheel and upload to PyPI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, dev]
+    tags: ["v*"]    # Trigger on tags creation like v1.2.3
+  # pull_request:
+  release:
+    types: [created]
+
+
+jobs:
+  build_wheel:       ### Build wheel file
+    name: Build wheel file
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+
+    ### Only trigger if the commit message starts with 'r:' or 'dev:'
+    if: >
+      (github.event_name == 'push' &&
+        (startsWith(github.event.head_commit.message, 'r:') ||
+        startsWith(github.event.head_commit.message, 'dev:'))
+      ) || github.event_name == 'workflow_dispatch' || github.event_name == 'release'
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # Fetch full history and tags
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v6
+        with:
+          python-version: 3.x
+
+      - name: Create version manually for setuptools-scm
+        run: |
+          LATEST_TAG=$(git describe --tags "$(git rev-list --tags --max-count=1)" | sed 's/^v//')
+          LATEST_TAG_COMMIT=$(git rev-list --tags --max-count=1)
+          NUM_COMMITS=$(git rev-list ${LATEST_TAG_COMMIT}..HEAD --count --all)
+          if [ "$NUM_COMMITS" -gt 0 ]; then
+              # Split tag into array and increment last part
+              IFS='.' read -r -a PARTS <<< "$LATEST_TAG"
+              LAST_INDEX=$((${#PARTS[@]} - 1))
+              PARTS[$LAST_INDEX]=$((PARTS[$LAST_INDEX] + 1))
+
+              # Join back into version string
+              NEXT_TAG=$(IFS='.'; echo "${PARTS[*]}")
+              SETUPTOOLS_SCM_PRETEND_VERSION="${NEXT_TAG}.dev${NUM_COMMITS}"
+          else
+              SETUPTOOLS_SCM_PRETEND_VERSION="$LATEST_TAG"
+          fi
+          echo "SETUPTOOLS_SCM_PRETEND_VERSION=$SETUPTOOLS_SCM_PRETEND_VERSION" >> $GITHUB_ENV
+
+      - name: Build wheel
+        run: |
+          pip install build
+          python -m build --wheel
+
+      - name: Upload wheel to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # with:
+          # To test: repository-url: https://test.pypi.org/legacy/
+          # path: dist/
