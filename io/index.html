@@ -1,0 +1,2159 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="C.Thang Nguyen">
+      
+      
+      
+        <link rel="prev" href="../struct/">
+      
+      
+        <link rel="next" href="../api/">
+      
+      
+      <link rel="icon" href="../1images/one-note-128-o.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>io - thase</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.279655fc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../_extra_theme/extra_css/full_width.css">
+    
+      <link rel="stylesheet" href="../_extra_theme/extra_css/font_size.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-QM7DWGY7ZT"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-QM7DWGY7ZT",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-QM7DWGY7ZT",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#asext.io" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="thase" class="md-header__button md-logo" aria-label="thase" data-md-component="logo">
+      
+  <img src="../1images/one-note-128-o.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            thase
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              io
+            
+          </span>
+        </div>
+      </div>
+    </div>
+      
+        
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io" class="md-tabs__link">
+        
+  
+  
+    
+  
+  home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/alff_doc" class="md-tabs__link">
+        
+  
+  
+    
+  
+  alff
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/thkit_doc" class="md-tabs__link">
+        
+  
+  
+    
+  
+  thkit
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+    
+  
+  asext
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/thmd_doc" class="md-tabs__link">
+        
+  
+  
+    
+  
+  thmd
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/thml_doc" class="md-tabs__link">
+        
+  
+  
+    
+  
+  thml
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/molbuilder" class="md-tabs__link">
+        
+  
+  
+    
+  
+  molbuilder
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/cluster" class="md-tabs__link">
+        
+  
+  
+    
+  
+  hpc
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/ref" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ref
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/odd" class="md-tabs__link">
+        
+  
+  
+    
+  
+  odd
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/tv" class="md-tabs__link">
+        
+  
+  
+    
+  
+  tv
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/blog" class="md-tabs__link">
+        
+  
+  
+    
+  
+  blog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="http://thangckt.github.io/email" class="md-tabs__link">
+        
+  
+  
+    
+  
+  email
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="thase" class="md-nav__button md-logo" aria-label="thase" data-md-component="logo">
+      
+  <img src="../1images/one-note-128-o.png" alt="logo">
+
+    </a>
+    thase
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/alff_doc" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    alff
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/thkit_doc" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    thkit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href=".." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    asext
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            asext
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Modules
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    cell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../struct/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    struct
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    io
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    io
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#asext.io" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;io
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" io">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.lmpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;lmpdata
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" lmpdata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.lmpdata.read_lammps_dump_text" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;read_lammps_dump_text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.lmpdata.write_lammps_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;write_lammps_data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" write_lammps_data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.lmpdata.write_lammps_data--parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;readwrite
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" readwrite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.read_extxyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;read_extxyz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.write_extxyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;write_extxyz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.read_lmpdump" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;read_lmpdump
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.write_lmpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;write_lmpdata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.extxyz2lmpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;extxyz2lmpdata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.lmpdata2extxyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;lmpdata2extxyz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.lmpdump2extxyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;lmpdump2extxyz
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/thmd_doc" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    thmd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/thml_doc" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    thml
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/molbuilder" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    molbuilder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/cluster" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    hpc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/ref" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ref
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/odd" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    odd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/tv" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    tv
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/blog" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    blog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http://thangckt.github.io/email" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    email
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#asext.io" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;io
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" io">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.lmpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;lmpdata
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" lmpdata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.lmpdata.read_lammps_dump_text" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;read_lammps_dump_text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.lmpdata.write_lammps_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;write_lammps_data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" write_lammps_data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.lmpdata.write_lammps_data--parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;readwrite
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" readwrite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.read_extxyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;read_extxyz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.write_extxyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;write_extxyz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.read_lmpdump" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;read_lmpdump
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.write_lmpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;write_lmpdata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.extxyz2lmpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;extxyz2lmpdata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.lmpdata2extxyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;lmpdata2extxyz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asext.io.readwrite.lmpdump2extxyz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;lmpdump2extxyz
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>io</h1>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="asext.io" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <code>asext.io</code>
+
+
+<a href="#asext.io" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+<p><span class="doc-section-title">Modules:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code><a class="autorefs autorefs-internal" title="            lmpdata (asext.io.lmpdata)" href="../api/#asext.io.lmpdata">lmpdata</a></code></b>
+          –
+          <div class="doc-md-description">
+            
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code><a class="autorefs autorefs-internal" title="            readwrite (asext.io.readwrite)" href="../api/#asext.io.readwrite">readwrite</a></code></b>
+          –
+          <div class="doc-md-description">
+            
+          </div>
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h3 id="asext.io.lmpdata" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <code>lmpdata</code>
+
+
+<a href="#asext.io.lmpdata" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+
+
+
+
+
+
+
+<p><span class="doc-section-title">Functions:</span></p>
+    <ul>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            read_lammps_dump_text(file: str, index=-1, **kwargs) (asext.io.lmpdata.read_lammps_dump_text)" href="../api/#asext.io.lmpdata.read_lammps_dump_text">read_lammps_dump_text</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Process cleartext lammps dumpfiles</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            write_lammps_data(file: str, atoms: Atoms, *, specorder: list = None, reduce_cell: bool = False, force_skew: bool = False, prismobj: Prism = None, write_image_flags: bool = False, masses: bool = False, velocities: bool = False, units: str = 'metal', bonds: bool = True, atom_style: str = 'atomic') (asext.io.lmpdata.write_lammps_data)" href="../api/#asext.io.lmpdata.write_lammps_data">write_lammps_data</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Write atomic structure data to a LAMMPS data file.</p>
+            </div>
+          </li>
+    </ul>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="asext.io.lmpdata.read_lammps_dump_text" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">read_lammps_dump_text</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+<a href="#asext.io.lmpdata.read_lammps_dump_text" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Process cleartext lammps dumpfiles</p>
+<p>:param fileobj: filestream providing the trajectory data
+:param index: integer or slice object (default: get the last timestep)
+:returns: list of Atoms objects
+:rtype: list</p>
+<p>Notes:
+- This function is a modified version of <code>ase.io.lammpsrun.read_lammps_dump_text</code> to allow storing atom types if <code>type</code> column is given in the LAMMPS dump file.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="asext.io.lmpdata.write_lammps_data" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">write_lammps_data</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">atoms</span><span class="p">:</span> <span class="n">Atoms</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">specorder</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reduce_cell</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">force_skew</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">prismobj</span><span class="p">:</span> <span class="n">Prism</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">write_image_flags</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">masses</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">velocities</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;metal&#39;</span><span class="p">,</span> <span class="n">bonds</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">atom_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;atomic&#39;</span><span class="p">)</span></code>
+
+<a href="#asext.io.lmpdata.write_lammps_data" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Write atomic structure data to a LAMMPS data file.</p>
+<h6 id="asext.io.lmpdata.write_lammps_data--parameters">Parameters<a class="headerlink" href="#asext.io.lmpdata.write_lammps_data--parameters" title="Permanent link">&para;</a></h6>
+<p>fd : file|str
+    File to which the output will be written.
+atoms : Atoms
+    Atoms to be written.
+specorder : list[str], optional
+    Chemical symbols in the order of LAMMPS atom types, by default None
+force_skew : bool, optional
+    Force to write the cell as a
+    <code>triclinic &lt;https://docs.lammps.org/Howto_triclinic.html&gt;</code>__ box,
+    by default False
+reduce_cell : bool, optional
+    Whether the cell shape is reduced or not, by default False
+prismobj : Prism|None, optional
+    Prism, by default None
+write_image_flags : bool, default False
+    If True, the image flags, i.e., in which images of the periodic
+    simulation box the atoms are, are written.
+masses : bool, optional
+    Whether the atomic masses are written or not, by default False
+velocities : bool, optional
+    Whether the atomic velocities are written or not, by default False
+units : str, optional
+    <code>LAMMPS units &lt;https://docs.lammps.org/units.html&gt;</code><strong>,
+    by default 'metal'
+bonds : bool, optional
+    Whether the bonds are written or not. Bonds can only be written
+    for atom_style='full', by default True
+atom_style : {'atomic', 'charge', 'full'}, optional
+    <code>LAMMPS atom style &lt;https://docs.lammps.org/atom_style.html&gt;</code></strong>,
+    by default 'atomic'</p>
+<p>Notes:
+- This function is a modified version of <code>ase.io.lammpsdata.write_lammps_data</code> to allow writing atom types based on <code>atoms.arrays['type']</code> if it exists. Otherwise, the atom types are assigned based on the order of <code>specorder</code> or sorted chemical symbols.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h3 id="asext.io.readwrite" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <code>readwrite</code>
+
+
+<a href="#asext.io.readwrite" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+
+
+
+
+
+
+
+<p><span class="doc-section-title">Functions:</span></p>
+    <ul>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            read_extxyz(extxyz_file: str, index=':') -> list[Atoms] (asext.io.readwrite.read_extxyz)" href="../api/#asext.io.readwrite.read_extxyz">read_extxyz</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Read extxyz file. The existing <code>ase.io.read</code> returns a single Atoms object if file contains only one frame. This function will return a list of Atoms object.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            write_extxyz(outfile: str, structs: list[Atoms]) -> None (asext.io.readwrite.write_extxyz)" href="../api/#asext.io.readwrite.write_extxyz">write_extxyz</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Write a list of Atoms object to an extxyz file. The existing <code>ase.io.write</code> function does not support writing file if the parent directory does not exist. This function will overcome this problem.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            read_lmpdump(lmpdump_file: str, index=-1, units='metal', **kwargs) -> list[Atoms] (asext.io.readwrite.read_lmpdump)" href="../api/#asext.io.readwrite.read_lmpdump">read_lmpdump</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Shortcut to <code>ase.io.lammpsrun.read_lammps_dump</code> function.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            write_lmpdata(file: str, atoms: Atoms, *, specorder: list = None, reduce_cell: bool = False, force_skew: bool = False, prismobj: Prism = None, write_image_flags: bool = False, masses: bool = True, velocities: bool = False, units: str = 'metal', bonds: bool = True, atom_style: str = 'atomic') -> None (asext.io.readwrite.write_lmpdata)" href="../api/#asext.io.readwrite.write_lmpdata">write_lmpdata</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Shortcut to <code>ase.io.lammpsdata.write_lammps_data</code> function.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            extxyz2lmpdata(extxyz_file: str, lmpdata_file: str, masses: bool = True, units: str = 'metal', atom_style: str = 'atomic', **kwargs) -> list[str] (asext.io.readwrite.extxyz2lmpdata)" href="../api/#asext.io.readwrite.extxyz2lmpdata">extxyz2lmpdata</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Convert extxyz file to LAMMPS data file.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            lmpdata2extxyz(lmpdata_file: str, extxyz_file: str, original_cell_file: str = None) (asext.io.readwrite.lmpdata2extxyz)" href="../api/#asext.io.readwrite.lmpdata2extxyz">lmpdata2extxyz</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Convert LAMMPS data file to extxyz file.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            lmpdump2extxyz(lmpdump_file: str, extxyz_file: str, index: int | slice = -1, original_cell_file: str = None, stress_file: str = None, lammps_units: str = 'metal') (asext.io.readwrite.lmpdump2extxyz)" href="../api/#asext.io.readwrite.lmpdump2extxyz">lmpdump2extxyz</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Convert LAMMPS dump file to extxyz file.</p>
+            </div>
+          </li>
+    </ul>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="asext.io.readwrite.read_extxyz" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">read_extxyz</span><span class="p">(</span><span class="n">extxyz_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Atoms</span><span class="p">]</span></code>
+
+<a href="#asext.io.readwrite.read_extxyz" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Read extxyz file. The existing <code>ase.io.read</code> returns a single Atoms object if file contains only one frame. This function will return a list of Atoms object.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>extxyz_file</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Path to the output file.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+<b><code>list</code></b> (              <code><span title="list">list</span>[<span title="ase.atoms.Atoms">Atoms</span>]</code>
+)          –
+          <div class="doc-md-description">
+            <p>List of Atoms object.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<details class="note" open>
+  <summary>Note</summary>
+  <ul>
+<li><code>ase.io.read</code> returns a single Atoms object or a list of Atoms object, depending on the <code>index</code> argument.<ul>
+<li><code>index=":"</code> will always return a list.</li>
+<li><code>index=0</code> or <code>index=-1</code> will return a single Atoms object.</li>
+</ul>
+</li>
+<li>this function will always return a list of Atoms object, even <code>index=0</code> or <code>index=-1</code></li>
+</ul>
+</details>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="asext.io.readwrite.write_extxyz" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">write_extxyz</span><span class="p">(</span><span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">structs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Atoms</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span></code>
+
+<a href="#asext.io.readwrite.write_extxyz" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Write a list of Atoms object to an extxyz file. The existing <code>ase.io.write</code> function does not support writing file if the parent directory does not exist. This function will overcome this problem.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>structs</code></b>
+              (<code><span title="list">list</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>List of Atoms object.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>outfile</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Path to the output file.</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="asext.io.readwrite.read_lmpdump" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">read_lmpdump</span><span class="p">(</span><span class="n">lmpdump_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;metal&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Atoms</span><span class="p">]</span></code>
+
+<a href="#asext.io.readwrite.read_lmpdump" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Shortcut to <code>ase.io.lammpsrun.read_lammps_dump</code> function.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>lmpdump_file</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Path to the LAMMPS dump file.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>index</code></b>
+              (<code><span title="int">int</span> | <span title="list">list</span>[<span title="int">int</span>]</code>, default:
+                  <code>-1</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>integer or slice object (default: get the last timestep)</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>order</code></b>
+              (<code><span title="bool">bool</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>sort atoms by id. Might be faster to turn off. Default: True</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>specorder</code></b>
+              (<code><span title="list">list</span>[<span title="str">str</span>]</code>)
+          –
+          <div class="doc-md-description">
+            <p>list of species to map lammps types to ase-species. Default: None</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>units</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;metal&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>lammps units for unit transformation between lammps and ase</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+<b><code>list</code></b> (              <code><span title="list">list</span>[<span title="ase.atoms.Atoms">Atoms</span>]</code>
+)          –
+          <div class="doc-md-description">
+            <p>List of Atoms object.</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="asext.io.readwrite.write_lmpdata" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">write_lmpdata</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">atoms</span><span class="p">:</span> <span class="n">Atoms</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">specorder</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reduce_cell</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">force_skew</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">prismobj</span><span class="p">:</span> <span class="n">Prism</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">write_image_flags</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">masses</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">velocities</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;metal&#39;</span><span class="p">,</span> <span class="n">bonds</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">atom_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;atomic&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span></code>
+
+<a href="#asext.io.readwrite.write_lmpdata" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Shortcut to <code>ase.io.lammpsdata.write_lammps_data</code> function.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>file</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>File to which the output will be written.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>atoms</code></b>
+              (<code><span title="ase.atoms.Atoms">Atoms</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Atoms to be written.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>specorder</code></b>
+              (<code><span title="list">list</span>[<span title="str">str</span>]</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Chemical symbols in the order of LAMMPS atom types, by default None</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>force_skew</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>False</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Force to write the cell as a <code>triclinic &lt;https://docs.lammps.org/Howto_triclinic.html&gt;</code> box, by default False</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>reduce_cell</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>False</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Whether the cell shape is reduced or not, by default False</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>prismobj</code></b>
+              (<code><span title="ase.calculators.lammps.Prism">Prism</span> | None</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Prism, by default None</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>write_image_flags</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>False</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>default False. If True, the image flags, i.e., in which images of the periodic simulation box the atoms are, are written.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>masses</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>True</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Whether the atomic masses are written or not, by default True</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>velocities</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>False</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Whether the atomic velocities are written or not, by default False</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>units</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>&#39;metal&#39;</code>
+)
+          –
+          <div class="doc-md-description">
+            <p><code>LAMMPS units &lt;https://docs.lammps.org/units.html&gt;</code>, by default 'metal'</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>bonds</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>True</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Whether the bonds are written or not. Bonds can only be written for atom_style='full', by default True</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>atom_style </code></b>
+          –
+          <div class="doc-md-description">
+            <p>{'atomic', 'charge', 'full'}, optional. <code>LAMMPS atom style &lt;https://docs.lammps.org/atom_style.html&gt;</code>, by default 'atomic'</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code>None</code>
+          –
+          <div class="doc-md-description">
+            <p>None</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="asext.io.readwrite.extxyz2lmpdata" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">extxyz2lmpdata</span><span class="p">(</span><span class="n">extxyz_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lmpdata_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">masses</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;metal&#39;</span><span class="p">,</span> <span class="n">atom_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;atomic&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+<a href="#asext.io.readwrite.extxyz2lmpdata" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Convert extxyz file to LAMMPS data file.
+Note:
+    - need to save 'original_cell' to able to revert the original orientation of the crystal.
+    - Use <code>atoms.arrays['type']</code> to set atom types when convert from <code>extxyz</code> to <code>lammpsdata</code> file.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="asext.io.readwrite.lmpdata2extxyz" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">lmpdata2extxyz</span><span class="p">(</span><span class="n">lmpdata_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extxyz_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">original_cell_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#asext.io.readwrite.lmpdata2extxyz" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Convert LAMMPS data file to extxyz file.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="asext.io.readwrite.lmpdump2extxyz" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">lmpdump2extxyz</span><span class="p">(</span><span class="n">lmpdump_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extxyz_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">slice</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">original_cell_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">stress_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">lammps_units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;metal&#39;</span><span class="p">)</span></code>
+
+<a href="#asext.io.readwrite.lmpdump2extxyz" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Convert LAMMPS dump file to extxyz file.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>lmpdump_file</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Path to the LAMMPS dump file.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>extxyz_file</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Path to the output extxyz file.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>original_cell_file</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Path to the text file contains original_cell. It should a simple text file that can write/read with numpy. If not provided, try to find in the same directory as <code>lmpdump_file</code> with the extension <code>.original_cell</code>. Defaults to None.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>stress_file</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Path to the text file contains stress tensor. Defaults to None.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<details class="restriction" open>
+  <summary>Restriction</summary>
+  <ul>
+<li>Current ver: stress is mapped based on frame_index, it requires that frames in text stress file must be in the same "length and order" as in the LAMMPS dump file.</li>
+<li><code>struct.info.get("timestep")</code> is a new feature in ASE 3.25 ?</li>
+</ul>
+</details>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../struct/" class="md-footer__link md-footer__link--prev" aria-label="Previous: struct">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                struct
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../api/" class="md-footer__link md-footer__link--next" aria-label="Next: API">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                API
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 <a href="https://thangckt.github.io">thangckt</a>
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "navigation.expand", "navigation.indexes", "navigation.tracking", "navigation.top", "search.suggest", "toc.follow", "navigation.tabs", "navigation.tabs.sticky", "navigation.tabs.header", "navigation.footer"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.bbea823e.min.js"></script>
+      
+        <script src="../1thang_js/gas_ip_logger.js"></script>
+      
+    
+  </body>
+</html>
