@@ -41,7 +41,7 @@ def read_extxyz(extxyz_file: str, index=":") -> list[Atoms]:
     return struct_list
 
 
-def write_extxyz(outfile: str, structs: list[Atoms]) -> None:
+def write_extxyz(outfile: str, structs: list[Atoms] | Atoms) -> None:
     """Write a list of Atoms object to an extxyz file. The existing `ase.io.write` function does not support writing file if the parent directory does not exist. This function will overcome this problem.
 
     Args:
