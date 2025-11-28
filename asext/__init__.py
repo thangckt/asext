@@ -1,7 +1,8 @@
 """
-<img src="./1images/kde_color_128x128.png" style="float: left; margin-right: 20px" width="120" />
+<img src="https://thangckt.github.io/asext_doc/1images/kde_color_128x128.png" style="float: left; margin-right: 20px" width="120" />
 
-Python package extends functions of ASE (Atomic Simulation Environment).
+<br>
+ASEXT: Python package extends functions of ASE (Atomic Simulation Environment).
 
 Developed and maintained by [C.Thang Nguyen](https://thangckt.github.io)
 """
