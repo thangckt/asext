@@ -151,27 +151,38 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
+          inventories:
+          - https://docs.python.org/3/objects.inv
+          - https://mkdocstrings.github.io/objects.inv
+          - https://mkdocstrings.github.io/autorefs/objects.inv
+          - https://mkdocstrings.github.io/griffe/objects.inv
+          - https://python-markdown.github.io/objects.inv
           options: # https://mkdocstrings.github.io/python/usage/#globallocal-options
+            backlinks: tree
+            docstring_options:
+              ignore_init_summary: true
+            docstring_style: "google" # Docstrig options: google, numpy, sphinx
+            docstring_section_style: "list" # 'table', 'list', 'spacy'
+            parameter_headings: true
+            inherited_members: true # member options
+            members_order: "source"
+            filters:
+              - "!^_[^_]"  # exclude private members
+              - "!__email__"
+            show_submodules: true
             show_root_heading: true
             show_category_heading: false
             show_symbol_type_heading: true
             show_symbol_type_toc: true
             show_source: false
             show_signature_annotations: true
-            inherited_members: true # member options
-            members_order: "source"
-            filters: ["!^_[^_]"]
-            show_submodules: true
-            summary: true
-            docstring_style: "google" # Docstrig options: google, numpy, sphinx
-            docstring_section_style: "list" # 'table', 'list', 'spacy'
             show_if_no_docstring: true
             merge_init_into_class: true
+            summary: true
           # path: [.]
           # import:
           #   - https://docs.python.org/3/objects.inv
           #   - https://mkdocstrings.github.io/autorefs/objects.inv
-
 ###=======================================
 ### Site content
 ###=======================================
@@ -191,7 +202,7 @@ nav:
 
       # - Schema:
       #   - Schema for remote machines: schema_doc/config_remotes.md
-      - API: api.md
+      - API reference: api.md
       # - Changelog: CHANGELOG.md
 
   - thmd: http://thangckt.github.io/thmd_doc
