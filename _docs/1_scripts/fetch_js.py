@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import requests
 
 
@@ -11,6 +13,7 @@ def download_rawtext(url: str, outfile: str | None = None) -> str:
         text = ""
 
     if text and outfile:
+        Path(outfile).parent.mkdir(parents=True, exist_ok=True)
         with open(outfile, "w") as f:
             f.write(text)
         print(f"File downloaded: {outfile}")
