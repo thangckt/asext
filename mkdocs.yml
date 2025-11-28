@@ -163,7 +163,7 @@ plugins:
               ignore_init_summary: true
             docstring_style: "google" # Docstrig options: google, numpy, sphinx
             docstring_section_style: "list" # 'table', 'list', 'spacy'
-            parameter_headings: true
+            parameter_headings: false
             inherited_members: true # member options
             members_order: "source"
             filters:
