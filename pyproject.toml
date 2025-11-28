@@ -8,13 +8,26 @@ dynamic = ["version"]
 description = "Python package extends functions of ASE (Atomic Simulation Environment)"
 authors = [{ name = "C.Thang Nguyen", email = "sth@sth.com" }]
 license = { file = "LICENSE.md" }
+classifiers = [
+    'Intended Audience :: Science/Research',
+    'Operating System :: OS Independent',
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    'Topic :: Scientific/Engineering :: Physics'
+]
 
-requires-python = ">=3.9"
+requires-python = '>=3.10'
 dependencies = ['ase', 'numpy']
 
 [project.optional-dependencies]
 bare = []
 test = ['pytest', 'pytest-cov', 'numpy']
+
+[project.urls]
+Homepage = "https://thangckt.github.io/asext_doc"
 
 [tool.setuptools_scm]
 write_to = "asext/_version.py"
