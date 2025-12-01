@@ -1,11 +1,5 @@
-from __future__ import annotations
-
-from typing import TYPE_CHECKING, cast
-
-if TYPE_CHECKING:
-    pass
-
 import random
+from typing import cast
 
 import numpy as np
 from ase.atoms import Atoms
