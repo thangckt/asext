@@ -3,11 +3,12 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, cast
 
 if TYPE_CHECKING:
-    from ase.atoms import Atoms
+    pass
 
 import random
 
 import numpy as np
+from ase.atoms import Atoms
 
 # from ase import units
 from ase.io import read
