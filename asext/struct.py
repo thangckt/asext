@@ -9,7 +9,7 @@ from ase.io import read
 
 
 #####ANCHOR ASE atoms manipulation
-def strain_struct(input_struct: Atoms, strains: list[float] = [0, 0, 0]) -> Atoms:
+def strain_struct(input_struct: Atoms, strains: list[float] = [0.0, 0, 0]) -> Atoms:
     """Apply engineering strain to an ASE Atoms structure along lattice vectors a, b, c.
 
     Args:
