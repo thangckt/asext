@@ -22,7 +22,7 @@ def _lammps_data_to_ase_atoms(
     prismobj=None,
     units="metal",
 ):
-    """Extract positions and other per-atom parameters and create Atoms
+    """Extract positions and other per-atom parameters and create Atoms.
 
     :param data: per atom data
     :param colnames: index for data
@@ -186,7 +186,7 @@ def _lammps_data_to_ase_atoms(
 
 
 def read_lammps_dump_text(file: str, index=-1, **kwargs):
-    """Process cleartext lammps dumpfiles
+    """Process cleartext lammps dumpfiles.
 
     :param fileobj: filestream providing the trajectory data
     :param index: integer or slice object (default: get the last timestep)
@@ -250,10 +250,10 @@ def write_lammps_data(
     file: str,
     atoms: Atoms,
     *,
-    specorder: list = None,
+    specorder: list[str] | None = None,
     reduce_cell: bool = False,
     force_skew: bool = False,
-    prismobj: Prism = None,
+    prismobj: Prism | None = None,
     write_image_flags: bool = False,
     masses: bool = False,
     velocities: bool = False,
@@ -299,7 +299,6 @@ def write_lammps_data(
     Notes:
     - This function is a modified version of `ase.io.lammpsdata.write_lammps_data` to allow writing atom types based on `atoms.arrays['type']` if it exists. Otherwise, the atom types are assigned based on the order of `specorder` or sorted chemical symbols.
     """
-
     fd = paropen(file, "w")
 
     if isinstance(atoms, list):
