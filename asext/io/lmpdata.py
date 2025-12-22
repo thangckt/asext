@@ -144,6 +144,8 @@ def _lammps_data_to_ase_atoms(
             celldisp=celldisp,
             cell=cell,
         )
+    else:
+        raise ValueError("No atomic positions found in LAMMPS output")
 
     if velocities is not None:
         if prismobj:
@@ -195,6 +197,7 @@ def read_lammps_dump_text(file: str, index=-1, **kwargs):
 
     Notes:
     - This function is a modified version of `ase.io.lammpsrun.read_lammps_dump_text` to allow storing atom types if `type` column is given in the LAMMPS dump file.
+    - Input `file`, instead of `fileobj`, can be a filename or a file object.
     """
     fileobj = paropen(file)
     # Load all dumped timesteps into memory simultaneously
@@ -239,7 +242,7 @@ def read_lammps_dump_text(file: str, index=-1, **kwargs):
             out_atoms.info.update(info)
             images.append(out_atoms)
 
-        if len(images) > index_end >= 0:
+        if len(images) > index_end >= 0:  # type: ignore[comparison-overlap]
             break
 
     return images[index]
@@ -304,7 +307,7 @@ def write_lammps_data(
     if isinstance(atoms, list):
         if len(atoms) > 1:
             raise ValueError("Can only write one configuration to a lammps data file!")
-        atoms = atoms[0]
+        atoms = atoms[0]  # type: ignore[assignment]
 
     fd.write("(written by ASE)\n\n")
 
