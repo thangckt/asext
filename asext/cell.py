@@ -169,7 +169,7 @@ def _polar_rotation(A: np.ndarray) -> np.ndarray:
     """
     from scipy.linalg import polar
 
-    R, U = polar(A)
+    R, U = polar(A)  # noqa
     # Ensure right-handed rotation (det = +1)
     if np.linalg.det(R) < 0:
         R[:, -1] *= -1
