@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 if TYPE_CHECKING:
     from ase.atoms import Atoms
@@ -14,9 +14,10 @@ from ase import units
 from ase.calculators.lammps import Prism
 from ase.calculators.singlepoint import SinglePointCalculator
 from ase.io import read, write
+from ase.io.lammpsdata import write_lammps_data
+from ase.io.lammpsrun import read_lammps_dump_text
 
 from asext.cell import rotate_struct_property
-from asext.io.lmpdata import _get_symbols_by_types, read_lammps_dump_text, write_lammps_data
 
 
 #####ANCHOR: Read/Write extxyz file
@@ -25,6 +26,7 @@ def read_extxyz(extxyz_file: str, index=":") -> list[Atoms]:
 
     Args:
         extxyz_file (str): Path to the output file.
+        index (int | slice | str): integer or slice object (default: get all frames)
 
     Returns:
         list: List of Atoms object.
@@ -36,7 +38,7 @@ def read_extxyz(extxyz_file: str, index=":") -> list[Atoms]:
         - this function will always return a list of Atoms object, even `index=0` or `index=-1`
     """
     struct_list = read(extxyz_file, format="extxyz", index=index)
-    if not isinstance(struct_list, list):  ### Ensure the result is always a list
+    if not isinstance(struct_list, list):  # Ensure the result is always a list
         struct_list = [struct_list]
     return struct_list
 
@@ -60,9 +62,10 @@ def read_lmpdump(lmpdump_file: str, index=-1, units="metal", **kwargs) -> list[A
     Args:
         lmpdump_file (str): Path to the LAMMPS dump file.
         index (int | list[int]): integer or slice object (default: get the last timestep)
+        units (str): lammps units for unit transformation between lammps and ase
         order (bool): sort atoms by id. Might be faster to turn off. Default: True
         specorder (list[str]): list of species to map lammps types to ase-species. Default: None
-        units (str): lammps units for unit transformation between lammps and ase
+        **kwargs: Additional arguments passed to `ase.io.lammpsrun.read_lammps_dump`
 
     Returns:
         list: List of Atoms object.
@@ -77,10 +80,10 @@ def write_lmpdata(
     file: str,
     atoms: Atoms,
     *,
-    specorder: list = None,
+    specorder: list[str] | None = None,
     reduce_cell: bool = False,
     force_skew: bool = False,
-    prismobj: Prism = None,
+    prismobj: Prism | None = None,
     write_image_flags: bool = False,
     masses: bool = True,
     velocities: bool = False,
@@ -111,10 +114,10 @@ def write_lmpdata(
     write_lammps_data(
         file,
         atoms,
-        specorder=specorder,
+        specorder=specorder,  # type: ignore
         reduce_cell=reduce_cell,
         force_skew=force_skew,
-        prismobj=prismobj,
+        prismobj=prismobj,  # type: ignore
         write_image_flags=write_image_flags,
         masses=masses,
         velocities=velocities,
@@ -133,13 +136,14 @@ def extxyz2lmpdata(
     units: str = "metal",
     atom_style: str = "atomic",
     **kwargs,
-) -> list[str]:
+) -> tuple[list, list]:
     """Convert extxyz file to LAMMPS data file.
+
     Note:
         - need to save 'original_cell' to able to revert the original orientation of the crystal.
         - Use `atoms.arrays['type']` to set atom types when convert from `extxyz` to `lammpsdata` file.
     """
-    struct = read(extxyz_file, format="extxyz", index="-1")
+    struct = read_extxyz(extxyz_file, index="-1")[0]
 
     write_lmpdata(lmpdata_file, struct, masses=masses, units=units, atom_style=atom_style, **kwargs)
     if "type" in struct.arrays:
@@ -158,11 +162,12 @@ def extxyz2lmpdata(
     return atom_names, pbc
 
 
-def lmpdata2extxyz(lmpdata_file: str, extxyz_file: str, original_cell_file: str = None):
+def lmpdata2extxyz(lmpdata_file: str, extxyz_file: str, original_cell_file: str | None = None):
     """Convert LAMMPS data file to extxyz file."""
     from ase.stress import voigt_6_to_full_3x3_stress  # full_3x3_to_voigt_6_stress
 
     atoms = read(lmpdata_file, format="lammps-data")
+    atoms = cast(Atoms, atoms)  # for type checking
     ### recover original orientation
     if original_cell_file is None:
         original_cell_file = (
@@ -174,7 +179,7 @@ def lmpdata2extxyz(lmpdata_file: str, extxyz_file: str, original_cell_file: str 
         p = Prism(original_cell)
         # atoms = align_struct_min_pos(atoms)
         atoms.positions = p.vector_to_ase(atoms.positions)
-        atoms.cell = p.vector_to_ase(atoms.cell)
+        atoms.cell = p.vector_to_ase(atoms.cell.array)
         if atoms.calc is not None and hasattr(atoms.calc, "results"):
             if "forces" in atoms.calc.results:
                 atoms.calc.results["forces"] = p.vector_to_ase(atoms.calc.results["forces"])
@@ -191,8 +196,8 @@ def lmpdump2extxyz(
     lmpdump_file: str,
     extxyz_file: str,
     index: int | slice = -1,
-    original_cell_file: str = None,
-    stress_file: str = None,
+    original_cell_file: str | None = None,
+    stress_file: str | None = None,
     lammps_units: str = "metal",
 ):
     ### Ref: /ase/io/lammpsrun.py; /ase/calculators/lammpslib.py/propagate()
@@ -201,14 +206,15 @@ def lmpdump2extxyz(
     Args:
         lmpdump_file (str): Path to the LAMMPS dump file.
         extxyz_file (str): Path to the output extxyz file.
-        original_cell_file (str, optional): Path to the text file contains original_cell. It should a simple text file that can write/read with numpy. If not provided, try to find in the same directory as `lmpdump_file` with the extension `.original_cell`. Defaults to None.
-        stress_file (str, optional): Path to the text file contains stress tensor. Defaults to None.
+        index (int | slice | str, optional): Integer, slice, or string to specify which frames to read from the LAMMPS dump file. Defaults to -1 (last frame).
+        original_cell_file (str | None, optional): Path to the text file contains original_cell. It should a simple text file that can write/read with numpy. If not provided, try to find in the same directory as `lmpdump_file` with the extension `.original_cell`. Defaults to None.
+        stress_file (str | None, optional): Path to the text file contains stress tensor. Defaults to None.
+        lammps_units (str, optional): LAMMPS units for unit transformation between LAMMPS and ASE. Defaults to "metal".
 
     Restriction:
         - Current ver: stress is mapped based on frame_index, it requires that frames in text stress file must be in the same "length and order" as in the LAMMPS dump file.
         - `struct.info.get("timestep")` is a new feature in ASE 3.25 ?
     """
-
     if lammps_units == "metal":
         # stress_unit = units.bar
         stress_unit = units.bar / (units.eV / units.Angstrom**3)  # bar to eV/A^3
@@ -261,3 +267,10 @@ def lmpdump2extxyz(
 #     symbols = struct.get_chemical_symbols()
 #     atom_names = sorted(set(symbols))
 #     return atom_names
+
+
+####ANCHOR: Support functions
+def _get_symbols_by_types(atoms: Atoms):
+    unique_types, first_idx = np.unique(atoms.arrays["type"], return_index=True)
+    symbols_by_type = [atoms.symbols[i] for i in first_idx]
+    return symbols_by_type

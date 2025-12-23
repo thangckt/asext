@@ -1,43 +1,39 @@
-from __future__ import annotations
-
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from ase.atoms import Atoms
-
 import random
-from pathlib import Path
+from typing import cast
 
 import numpy as np
+from ase.atoms import Atoms
 
 # from ase import units
 from ase.io import read
 
 
 #####ANCHOR ASE atoms manipulation
-def strain_struct(struct_in: Atoms, strains: list = [0, 0, 0]) -> Atoms:
-    """
-    Apply engineering strain to an ASE Atoms structure along lattice vectors a, b, c.
+def strain_struct(input_struct: Atoms, strains: list[float] = [0.0, 0, 0]) -> Atoms:
+    """Apply engineering strain to an ASE Atoms structure along lattice vectors a, b, c.
 
     Args:
-        struct (Atoms): ASE Atoms object.
+        input_struct (Atoms): ASE Atoms object.
         strains (list[float]): Engineering strains [ε_a, ε_b, ε_c]. New_length = old_length * (1 + ε).
 
     Returns:
         atoms (Atoms): New strained structure with scaled cell and atom positions.
     """
-    strains = np.asarray(strains, dtype=float)
-    assert strains.shape == (3,), "'factors' must be a sequence of 3 floats."
+    strains = np.asarray(strains, dtype=float)  # type: ignore
+    assert strains.shape == (3,), "'factors' must be a sequence of 3 floats."  # type: ignore
 
-    struct = struct_in.copy()
-    cell = struct.get_cell()
+    struct = input_struct.copy()
+    cell = struct.cell.array
     scaled_cell = np.array([cell[i] * (1.0 + strains[i]) for i in range(3)])
     struct.set_cell(scaled_cell, scale_atoms=True)
     return struct
 
 
 def perturb_struct(struct: Atoms, std_disp: float) -> Atoms:
-    """Perturb the atoms by random displacements. This method adds random displacements to the atomic positions. [See more](https://wiki.fysik.dtu.dk/ase/_modules/ase/atoms.html#Atoms.rattle)"""
+    """Perturb the atoms by random displacements.
+
+    This method adds random displacements to the atomic positions. [See more](https://wiki.fysik.dtu.dk/ase/_modules/ase/atoms.html#Atoms.rattle)
+    """
     struct = struct.copy()
     seed_number = random.randrange(2**16)
     struct.rattle(stdev=std_disp, seed=seed_number)
@@ -45,15 +41,13 @@ def perturb_struct(struct: Atoms, std_disp: float) -> Atoms:
 
 
 def slice_struct(struct_in: Atoms, slice_num=(1, 1, 1), tol=1.0e-5) -> Atoms:
-    """
-    Slice structure into the first subcell by given numbers along a, b, c (cell vector) directions.
-    """
+    """Slice structure into the first subcell by given numbers along a, b, c (cell vector) directions."""
     struct = struct_in.copy()
-    cell = struct.get_cell()
+    cell = struct.cell.array
 
     ### shrink cell
     new_cell = np.array([cell[i] / slice_num[i] for i in range(3)])
-    struct.set_cell(new_cell, strain_atoms=False)
+    struct.set_cell(new_cell, scale_atoms=False)
     struct.wrap()  # wrap all atoms into the new cell
 
     ### Remove duplicate atoms (within tolerance)
@@ -67,7 +61,7 @@ def slice_struct(struct_in: Atoms, slice_num=(1, 1, 1), tol=1.0e-5) -> Atoms:
 
     ### make new struct
     new_struct = struct[unique_indices]
-    new_struct.set_cell(new_cell, strain_atoms=False)
+    new_struct.set_cell(new_cell, scale_atoms=False)
     new_struct.set_pbc(struct.get_pbc())
 
     print(f"\tInput structure: {len(struct)} atoms. \n\tSliced structure: {len(new_struct)} atoms.")
@@ -75,18 +69,18 @@ def slice_struct(struct_in: Atoms, slice_num=(1, 1, 1), tol=1.0e-5) -> Atoms:
 
 
 def align_struct_min_pos(struct: Atoms) -> Atoms:
-    """Align min atoms position to the min cell corner (0,0,0)"""
+    """Align min atoms position to the min cell corner (0,0,0)."""
     min_pos = np.min(struct.positions, axis=0)
     struct.positions -= min_pos
     struct.wrap()
     return struct
 
 
-def set_vacuum(struct_in: Atoms, distances: list = [0.0, 0.0, 0.0]) -> Atoms:
+def set_vacuum(input_struct: Atoms, distances: list = [0.0, 0.0, 0.0]) -> Atoms:
     """This function *sets* vacuum along cell vectors a, b, c.
 
     Args:
-        struct (Atoms): ASE Atoms object to add vacuum.
+        input_struct (Atoms): ASE Atoms object to add vacuum.
         distances (list): Distances to add along cell vectors a, b, c (not x, y, z dims in Cartersian axes). Must be a list of 3 floats.
 
     Returns:
@@ -97,7 +91,7 @@ def set_vacuum(struct_in: Atoms, distances: list = [0.0, 0.0, 0.0]) -> Atoms:
     """
     assert len(distances) == 3, "'distances' must be a list of 3 floats."
 
-    struct = struct_in.copy()
+    struct = input_struct.copy()
     for i in range(3):
         if distances[i] > 0:
             struct.center(vacuum=distances[i] / 2, axis=i)
@@ -108,25 +102,22 @@ def set_vacuum(struct_in: Atoms, distances: list = [0.0, 0.0, 0.0]) -> Atoms:
 def check_bad_box_extxyz(
     extxyz_file: str,
     criteria: dict = {"length_ratio": 100, "wrap_ratio": 0.5, "tilt_ratio": 0.5},
-) -> list[int]:
+) -> bool:
     """Check structure in extxyz file whether it has bad box.
+
     Return:
         a file remarking the bad box frames.
     """
     struct = read(extxyz_file, index="-1", format="extxyz")
-    is_bad_box = check_bad_box(struct, criteria)
-    if is_bad_box:
-        with Path(f"{extxyz_file}.bad_box").open("w") as f:
-            f.write("This frame has bad box.")
-    return is_bad_box
+    struct = cast(Atoms, struct)  # for type checking
+    return check_bad_box(struct, criteria)
 
 
 def check_bad_box(
     struct: Atoms,
     criteria: dict = {"length_ratio": 20, "wrap_ratio": 0.5, "tilt_ratio": 0.5},
 ) -> bool:
-    """
-    Check if a simulation box is "bad" based on given criteria.
+    """Check if a simulation box is "bad" based on given criteria.
 
     Args:
     -----

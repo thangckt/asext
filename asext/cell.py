@@ -22,7 +22,7 @@ class AseCell(Cell):
         super().__init__(array)
 
     def lower_triangular_form(self) -> tuple[Cell, np.ndarray]:
-        """Rename original function `Cell.standard_form()`, see https://gitlab.com/ase/ase/-/blob/master/ase/cell.py?ref_type=heads#L333"""
+        """Rename original function `Cell.standard_form()`, see https://gitlab.com/ase/ase/-/blob/master/ase/cell.py?ref_type=heads#L333 ."""
         return self.standard_form(form="lower")
 
     def upper_triangular_form(self) -> tuple[Cell, np.ndarray]:
@@ -32,9 +32,10 @@ class AseCell(Cell):
 
 def make_upper_triangular_cell(atoms: Atoms, zero_tol: float = 1.0e-12) -> Atoms:
     """Atoms with a box is an *upper triangular matrix* is a requirement to run `NPT` class in ASE.
+
     [[ ax, ay, az ]
-     [  0, by, bz ]
-     [  0,  0, cz ]]
+    [  0, by, bz ]
+    [  0,  0, cz ]]
     """
     new_cell = AseCell(atoms.cell.array).upper_triangular_form()[0]
     atoms = rotate_struct_property(atoms, new_cell.array, wrap=True)
@@ -46,7 +47,8 @@ def make_upper_triangular_cell(atoms: Atoms, zero_tol: float = 1.0e-12) -> Atoms
 
 
 def make_lower_triangular_cell(atoms: Atoms, zero_tol: float = 1.0e-12) -> Atoms:
-    """Converts the cell matrix of `atoms` into a *lower triangular*, to be used in LAMMPS:
+    """Converts the cell matrix of `atoms` into a *lower triangular*, to be used in LAMMPS.
+
     [[ ax,  0,  0 ]
      [ bx, by,  0 ]
      [ cx, cy, cz ]]
@@ -62,6 +64,7 @@ def make_lower_triangular_cell(atoms: Atoms, zero_tol: float = 1.0e-12) -> Atoms
 
 def make_triangular_cell_extxyz(extxyz_file: str, form: str = "lower") -> None:
     """Make the cell of atoms in extxyz file to be triangular.
+
     Args:
         extxyz_file (str): Path to the extxyz file.
         form (str): 'upper' or 'lower'. Defaults to 'lower'.
@@ -132,13 +135,13 @@ class CellTransform:
         return vec @ self.R
 
     def vectors_backward(self, vec: np.ndarray) -> np.ndarray:
-        """Rotate vectors back from the new_cell to the old_cell. Same as [Prism.vector_to_ase](https://gitlab.com/ase/ase/-/blob/master/ase/calculators/lammps/coordinatetransform.py?ref_type=heads#L249)"""
+        """Rotate vectors back from the new_cell to the old_cell.Same as [Prism.vector_to_ase](https://gitlab.com/ase/ase/-/blob/master/ase/calculators/lammps/coordinatetransform.py?ref_type=heads#L249) ."""
         vec = np.asarray(vec, dtype=float)
         return vec @ self.R.T
 
     def tensor_forward(self, tensor: np.ndarray) -> np.ndarray:
         """Rotate the tensor from the old_cell's orient to the new_cell's orient.
-        (T' = Rᵀ T R) rotates the tensor into the rotated coordinate system
+        (T' = Rᵀ T R) rotates the tensor into the rotated coordinate system.
 
         Args:
             tensor (np.ndarray): 3x3 matrix represent the tensor properties. (e.g., 3x3 stress tensor)
@@ -151,7 +154,7 @@ class CellTransform:
 
     def tensor_backward(self, tensor: np.ndarray) -> np.ndarray:
         """Rotate the tensor back from the new_cell to the old_cell. Same as [Prism.tensor_to_ase](https://gitlab.com/ase/ase/-/blob/master/ase/calculators/lammps/coordinatetransform.py?ref_type=heads#L278)
-        (T = R T' Rᵀ) rotates the tensor back into the original coordinate system
+        (T = R T' Rᵀ) rotates the tensor back into the original coordinate system.
         """
         tensor = np.asarray(tensor, dtype=float)
         return self.R @ tensor @ self.R.T
@@ -166,7 +169,7 @@ def _polar_rotation(A: np.ndarray) -> np.ndarray:
     """
     from scipy.linalg import polar
 
-    R, U = polar(A)
+    R, U = polar(A)  # noqa
     # Ensure right-handed rotation (det = +1)
     if np.linalg.det(R) < 0:
         R[:, -1] *= -1
@@ -180,8 +183,7 @@ def rotate_struct_property(
     custom_vector_props: list[str] | None = None,
     custom_tensor_props: list[str] | None = None,
 ) -> Atoms:
-    """
-    Rotate atomic structure and its properties to match a new cell orientation.
+    """Rotate atomic structure and its properties to match a new cell orientation.
 
     Args:
         struct (ase.Atoms): Atoms object.

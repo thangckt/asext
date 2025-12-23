@@ -1,0 +1,46 @@
+/* Maximum space for text block */
+.md-grid {
+  max-width: 95%;
+  /* or 100%, if you want to stretch to full-width */
+}
+
+/* @media only screen and (min-width: 76.25em) {
+    .md-main__inner {
+      max-width: none;
+    }
+    .md-sidebar--primary {
+      left: 0;
+    }
+    .md-sidebar--secondary {
+      right: 0;
+      margin-left: 0;
+      -webkit-transform: none;
+      transform: none;
+    }
+  } */
+
+
+/* Reduce height of header bar */
+.md-header__inner,
+.md-header__title,
+.md-tabs__list,
+.md-tabs__item {
+  height: 42px;
+}
+
+.md-header__title {
+  line-height: 42px;
+}
+
+.md-tabs__item {
+  line-height: 9px;
+}
+
+.md-tabs__item a {
+  font-size: 12pt;
+}
+
+/* .md-tabs__item {
+    padding-left: .6rem;
+    padding-right: .6rem;
+  } */

@@ -1,44 +1,45 @@
-[build-system]
-requires = ["setuptools>=64", "setuptools_scm>=8"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "asext"
-dynamic = ["version"]
 description = "Python package extends functions of ASE (Atomic Simulation Environment)"
-authors = [{ name = "C.Thang Nguyen", email = "sth@sth.com" }]
+requires-python = ">=3.10"
 license = { file = "LICENSE.md" }
+authors = [{ name = "C.Thang Nguyen", email = "sth@sth.com" }]
 classifiers = [
-    'Intended Audience :: Science/Research',
-    'Operating System :: OS Independent',
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
-    'Topic :: Scientific/Engineering :: Physics'
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Physics"
 ]
-
-requires-python = '>=3.10'
-dependencies = ['ase', 'numpy']
-
-[project.optional-dependencies]
-bare = []
-test = ['pytest', 'pytest-cov', 'numpy']
+dependencies = ["ase", "numpy"]
+dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://thangckt.github.io/asext_doc"
 
-[tool.setuptools_scm]
-write_to = "asext/_version.py"
-version_scheme = "python-simplified-semver"
-local_scheme = "no-local-version"
-fallback_version = "0.1.0"
+[project.optional-dependencies]
+bare = []
+test = ["pytest", "pytest-cov", "numpy"]
 
-[tool.setuptools.packages.find]
+## Build system: Hatchling
+[build-system]
+requires = ["hatch-vcs>=0.4", "hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
 include = ["asext*"]
 exclude = ["1devtool*", "_docs*"]
 
+[tool.hatch.build.hooks.vcs]
+version-file = "asext/_version.py"
 
-[tool.setuptools.package-data]
-# asext = ['_cookie_file/*']
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+version_scheme = "python-simplified-semver"
+local_scheme = "no-local-version"
+fallback_version = "0.1.0"
