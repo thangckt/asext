@@ -2,10 +2,11 @@ import random
 from typing import cast
 
 import numpy as np
+
 from ase.atoms import Atoms
+from ase.io import read
 
 # from ase import units
-from ase.io import read
 
 
 #####ANCHOR ASE atoms manipulation

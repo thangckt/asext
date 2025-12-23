@@ -10,13 +10,13 @@ from pathlib import Path
 
 import numpy as np
 import polars as pl
+
 from ase import units
 from ase.calculators.lammps import Prism
 from ase.calculators.singlepoint import SinglePointCalculator
 from ase.io import read, write
 from ase.io.lammpsdata import write_lammps_data
 from ase.io.lammpsrun import read_lammps_dump_text
-
 from asext.cell import rotate_struct_property
 
 
@@ -69,10 +69,13 @@ def read_lmpdump(lmpdump_file: str, index=-1, units="metal", **kwargs) -> list[A
 
     Returns:
         list: List of Atoms object.
+
+    Note: Original `ase.io.lammpsrun.read_lammps_dump` accepts only `fileobj`, this function accepts `lmpdump_file` as file path.
     """
-    struct_list = read_lammps_dump_text(lmpdump_file, index=index, units=units, **kwargs)
-    if not isinstance(struct_list, list):  ### Ensure the result is always a list
-        struct_list = [struct_list]
+    with Path(lmpdump_file).open("r") as fileobj:
+        struct_list = read_lammps_dump_text(fileobj, index=index, units=units, **kwargs)
+        if not isinstance(struct_list, list):  ### Ensure the result is always a list
+            struct_list = [struct_list]
     return struct_list
 
 
@@ -106,9 +109,6 @@ def write_lmpdata(
         units (str, optional): `LAMMPS units <https://docs.lammps.org/units.html>`, by default 'metal'
         bonds (bool, optional): Whether the bonds are written or not. Bonds can only be written for atom_style='full', by default True
         atom_style : {'atomic', 'charge', 'full'}, optional. `LAMMPS atom style <https://docs.lammps.org/atom_style.html>`, by default 'atomic'
-
-    Returns:
-        None
     """
     Path(file).parent.mkdir(parents=True, exist_ok=True)
     write_lammps_data(
