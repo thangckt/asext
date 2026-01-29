@@ -14,21 +14,23 @@ jobs:
     name: MyST GitHub Pages deployment
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main          # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        uses: actions/checkout@v2
-
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.11'
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v3
 
       - name: Set up Node.js (required for mystmd)
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      # - name: Set up Python 3.11
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: '3.11'
+
       - name: Install dependencies
-        run: pip install mystmd
+        run: |
+          npm install -g mystmd
+          # pip install sphinx
 
       - name: Build MyST site
         run: myst build --html
