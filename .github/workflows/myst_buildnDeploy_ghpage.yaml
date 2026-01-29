@@ -10,39 +10,24 @@ on:
       - "dist/**"
 
 env:
-  # `BASE_URL` determines, relative to the root of the domain, the URL that your site is served from.
-  # E.g., if your site lives at `https://mydomain.org/myproject`, set `BASE_URL=/myproject`.
-  # If, instead, your site lives at the root of the domain, at `https://mydomain.org`, set `BASE_URL=''`.
   BASE_URL: /${{ github.event.repository.name }}
 
 jobs:
   deploy:
     name: MyST GitHub Pages deployment
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v3
 
-      # - name: Set up Node.js (required for mystmd)
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20
-
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v2
         with:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: |
-          # npm install -g mystmd
-          pip install mystmd
+        run: pip install mystmd
 
       - name: Build MyST site
-        run: myst build --html
+        run: myst build --html --base-url "$BASE_URL"
 
       - name: Upload to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
