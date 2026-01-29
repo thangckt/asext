@@ -28,8 +28,8 @@ jobs:
       - name: Build MyST site
         run: myst build
 
-      - name: Create .nojekyll file in site/
-        run: touch site/.nojekyll
+      - name: Create .nojekyll file in _build/site/
+        run: touch _build/site/.nojekyll
 
       - name: Upload to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
