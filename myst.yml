@@ -4,11 +4,11 @@ version: 1
 extends:
   # - ./_site/site.yml
 project:
-  title: asext
+  # title: asext
   # description:
   # keywords: []
   authors: [C.Thang Nguyen]
-  path: _docs
+  # path: ./_docs
 
   # references:
   #   guide: https://mystmd.org/guide
@@ -28,7 +28,7 @@ project:
   # github: https://github.com/jupyter-book/jupyter-book
 
   toc:
-    - file: index.md
+    - file: _docs/index.md
     # - title: Get Started
     #   file: get-started.md
     #   children:
@@ -90,9 +90,25 @@ project:
     #     - file: resources/glossary.md
     # - file: gallery.md
 
-# site:
+site:
+  template: book-theme
 #   options:
 #     style: media/custom.css
 #     folders: true
 #   parts:
 #     footer: _site/footer.md
+
+  title: My Python Package
+
+sphinx:
+  extensions:
+    - sphinx.ext.autodoc
+    - sphinx.ext.autosummary
+    - sphinx.ext.napoleon
+
+  autosummary_generate: true
+
+  autodoc_default_options:
+    members: true
+    undoc-members: false
+    show-inheritance: true
