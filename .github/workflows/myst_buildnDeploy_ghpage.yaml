@@ -17,10 +17,15 @@ jobs:
       - name: Checkout main          # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         uses: actions/checkout@v2
 
-      - name: Set up Python 3.13
+      - name: Set up Python 3.11
         uses: actions/setup-python@v2
         with:
-          python-version: '3.13'
+          python-version: '3.11'
+
+      - name: Set up Node.js (required for mystmd)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Install dependencies
         run: pip install mystmd
@@ -28,7 +33,7 @@ jobs:
       - name: Build MyST site
         run: myst build
 
-      - name: Create .nojekyll file in _build/site/
+      - name: Create .nojekyll file
         run: touch _build/site/.nojekyll
 
       - name: Upload to GitHub Pages
