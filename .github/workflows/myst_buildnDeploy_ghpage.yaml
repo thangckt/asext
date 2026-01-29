@@ -31,7 +31,7 @@ jobs:
         run: pip install mystmd
 
       - name: Build MyST site
-        run: myst build
+        run: myst build --html
 
       - name: Create .nojekyll file
         run: touch _build/site/.nojekyll
