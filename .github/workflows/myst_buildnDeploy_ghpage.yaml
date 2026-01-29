@@ -16,7 +16,7 @@ env:
   BASE_URL: /${{ github.event.repository.name }}
 
 jobs:
-  deploy::
+  deploy:
     name: MyST GitHub Pages deployment
     environment:
       name: github-pages
