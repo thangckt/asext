@@ -1,0 +1,38 @@
+name: MyST GitHub Pages Build & Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, dev]
+    paths-ignore:
+      - "1devtool/**"
+      - "*.egg-info/**"
+      - "dist/**"
+
+jobs:
+  build:
+    name: MyST GitHub Pages deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main          # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install mystmd
+
+      - name: Build MyST site
+        run: myst build
+
+      - name: Create .nojekyll file in site/
+        run: touch site/.nojekyll
+
+      - name: Upload to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_build/site
