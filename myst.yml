@@ -4,18 +4,27 @@ version: 1
 extends:
   # - ./_site/site.yml
 
-# sphinx:
-#   extensions:
-#     - sphinx.ext.autodoc
-#     - sphinx.ext.autosummary
-#     - sphinx.ext.napoleon
+sphinx:
+  extensions:
+    - autodoc2
+    - myst_parser
 
-#   autosummary_generate: true
+  config:
+    autodoc2_packages:
+      - path: src/yourpkg
+        module: yourpkg
 
-#   autodoc_default_options:
-#     members: true
-#     undoc-members: false
-#     show-inheritance: true
+    autodoc2_render_plugin: myst
+    autodoc2_output_dir: api/generated
+    autodoc2_hidden_objects:
+      - private
+
+    myst_enable_extensions:
+      - colon_fence
+      - deflist
+      - fieldlist
+      - attrs_block
+
 
 site:
   template: book-theme
@@ -54,7 +63,7 @@ project:
 
   toc:
     - file: _docs/index.md
-    # - title: Get Started
+    - file: _docs/api.md
     #   file: get-started.md
     #   children:
     #     - file: get-started/install.md
