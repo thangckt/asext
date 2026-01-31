@@ -8,12 +8,11 @@
             - "!__email__"
             - "!^_[^_]" -->
 
-```{autodoc2
-    module: asext
-    depth: 3
-    show_root_heading: true
-    show_root_description: true
-    show_module_heading: true
-    show_module_description: true
-}
+
+
+
+```{automodule} asext
+    :literal:
+    :literal-linenos:
+    :literal-lexer: markdown
 ```

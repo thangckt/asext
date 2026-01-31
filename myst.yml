@@ -64,6 +64,11 @@ project:
   toc:
     - file: _docs/index.md
     - file: _docs/api.md
+    # - pattern: _docs/_api_sphinx/**.myst.json
+
+    - title: Author
+      url: http://thangckt.github.io
+
     #   file: get-started.md
     #   children:
     #     - file: get-started/install.md
