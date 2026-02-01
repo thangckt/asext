@@ -1,4 +1,4 @@
-# API reference
+# API references
 
 <!-- ::: asext
     options:
@@ -11,8 +11,6 @@
 
 
 
-```{automodule} asext
-    :literal:
-    :literal-linenos:
-    :literal-lexer: markdown
+```{autodoc2-docstring} asext
+:allowtitles:
 ```

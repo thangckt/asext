@@ -63,8 +63,10 @@ project:
 
   toc:
     - file: _docs/index.md
-    - file: _docs/api.md
-    # - pattern: _docs/_api_sphinx/**.myst.json
+    # - file: _docs/api.md
+    - title: API Reference
+      children:
+        - pattern: _docs/sphinx_api_output/**/*.myst.json
 
     - title: Author
       url: http://thangckt.github.io

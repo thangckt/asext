@@ -2,13 +2,12 @@ import sys
 from pathlib import Path
 
 #####ANCHOR Make root package importable
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 project = "API Documentation"
 extensions = [
     "myst_parser",
     "autodoc2",
-    # "sphinx.ext.autodoc",
     "sphinx_ext_mystmd",
 ]
 numfig = True
@@ -16,7 +15,7 @@ numfig = True
 #####ANCHOR  autodoc2 config
 autodoc2_packages = [
     {
-        "path": "../asext",
+        "path": "../../asext",
         # "module": "asext",
     }
 ]
