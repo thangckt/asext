@@ -16,12 +16,21 @@ numfig = True
 autodoc2_packages = [
     {
         "path": "../../asext",
-        # "module": "asext",
+        "module": "asext",
+        "exclude_files": ["../../asext/_version.py"],
     }
 ]
 
 autodoc2_render_plugin = "myst"
-# autodoc2_hidden_objects = ["private"]
+autodoc2_hidden_objects = [
+    "private",
+    "dunder",
+    "inherited",
+]
+autodoc2_skip_module_regexes = [
+    "_version",
+]
+
 
 #####ANCHOR  MyST config
 myst_enable_extensions = [
