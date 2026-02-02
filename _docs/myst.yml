@@ -4,35 +4,13 @@ version: 1
 extends:
   # - ./_site/site.yml
 
-sphinx:
-  extensions:
-    - autodoc2
-    - myst_parser
-
-  config:
-    autodoc2_packages:
-      - path: src/yourpkg
-        module: yourpkg
-
-    autodoc2_render_plugin: myst
-    autodoc2_output_dir: api/generated
-    autodoc2_hidden_objects:
-      - private
-
-    myst_enable_extensions:
-      - colon_fence
-      - deflist
-      - fieldlist
-      - attrs_block
-
-
 site:
   template: book-theme
   options:
     # style: media/custom.css
     folders: true
-    favicon: ./_docs/1images/one-note-128-o.png
-    logo: ./_docs/1images/one-note-128-o.png
+    favicon: ./1images/one-note-128-o.png
+    logo: ./1images/one-note-128-o.png
     logo_text: asext
 #   parts:
 #     footer: _site/footer.md
@@ -41,7 +19,9 @@ project:
   # title:
   # description:
   # keywords: []
-  authors: [C.Thang Nguyen]
+  authors:
+    - name: C.Thang Nguyen
+      url: https://thangckt.github.io
   # path: ./_docs
 
   # references:
@@ -62,11 +42,11 @@ project:
   # github: https://github.com/jupyter-book/jupyter-book
 
   toc:
-    - file: _docs/index.md
-    # - file: _docs/api.md
+    - file: index.md
+    # - file: api.md
     - title: API Reference
       children:
-        - pattern: _docs/sphinx_api/_api_output/**/*.myst.json
+        - pattern: sphinx_api/_api_output/**/*.myst.json
 
     - title: Author
       url: http://thangckt.github.io

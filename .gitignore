@@ -19,9 +19,9 @@ __pycache__
 **/.ipynb_checkpoints/
 
 ### Build files
-/site
-/build
-/_build
+site/
+build/
+_build/
 _docs/sphinx_api/_api_output/
 _docs/sphinx_api/apidocs/
 /dist
@@ -42,7 +42,6 @@ _tmpAux/
 # *.synctex.gz
 *.synctex(busy)
 *.synctex.gz(busy)
-
 
 ### ----------------------------------------------------------------------------
 ###  synchronization stuff
