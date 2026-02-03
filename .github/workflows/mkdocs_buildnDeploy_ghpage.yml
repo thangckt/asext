@@ -1,4 +1,4 @@
-name: mkdocs gh-deploy
+name: MkDocs GitHub Pages Build & Deploy
 
 on:
   workflow_dispatch:
@@ -15,11 +15,8 @@ jobs:
     name: MkDocs Github Pages automatic deployment
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        uses: actions/checkout@v5
-
-      - name: Set up Python 3
-        uses: actions/setup-python@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
