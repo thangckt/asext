@@ -41,7 +41,18 @@ napoleon_include_init_with_doc = True
 
 #####ANCHOR  MyST config
 myst_enable_extensions = [
+    "amsmath",
+    "attrs_inline",
     "colon_fence",
     "deflist",
+    "dollarmath",
     "fieldlist",
+    "html_admonition",
+    "html_image",
+    "linkify",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
 ]
