@@ -35,7 +35,7 @@ conda activate "${conda_env}"
 # conda install --update-specs -y -c conda-forge python=${python_ver}
 # conda config --set solver classic  # libmamba vs. classic
 
-pip install -r requirement.txt
+# pip install -r requirement.txt
 
 echo -e "\nTASK: Check conda env"
 echo "Python: $(python -c 'import sys;print(sys.version)')"
@@ -46,7 +46,7 @@ echo "CONDA_PREFIX: ${CONDA_PREFIX}"
 rundir=$(pwd)
 
 ### 1. Build API docs using Sphinx's autodoc extension
-rm -rf sphinx_doc/_apidoc sphinx_doc/_summary
+rm -rf sphinx_doc/_apidoc sphinx_doc/_toctree
 sphinx-build -b myst sphinx_doc sphinx_doc/_apidoc
 
 ### 2. Build the full docs using MyST

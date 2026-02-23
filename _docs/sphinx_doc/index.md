@@ -2,7 +2,7 @@
 
 ```{eval-rst}
 .. autosummary::
-    :toctree: _summary
+    :toctree: _toctree
     :recursive:
 
     asext

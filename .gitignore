@@ -24,6 +24,7 @@ build/
 _build/
 _docs/_build/
 _docs/sphinx_doc/_apidoc/
+_docs/sphinx_doc/_toctree/
 /dist
 /MANIFEST
 *.egg-info
