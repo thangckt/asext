@@ -87,7 +87,7 @@ def set_vacuum(input_struct: Atoms, distances: list = [0.0, 0.0, 0.0]) -> Atoms:
     Returns:
         struct: A new Atoms object with an expanded cell and centered atoms.
 
-    Notes:
+    Note:
         - `atoms.center()` sets vacuum on both sides of the cell along the specified axis. So the total vacuum is *twice the input value*. This function is different in that, it set total vacuum equal to the input value.
     """
     assert len(distances) == 3, "'distances' must be a list of 3 floats."
@@ -107,7 +107,7 @@ def check_bad_box_extxyz(
     """Check structure in extxyz file whether it has bad box.
 
     Return:
-        a file remarking the bad box frames.
+        is_bad (bool): True if the simulation box violates any of the given criteria, otherwise False.
     """
     struct = read(extxyz_file, index="-1", format="extxyz")
     struct = cast(Atoms, struct)  # for type checking
@@ -121,31 +121,24 @@ def check_bad_box(
     """Check if a simulation box is "bad" based on given criteria.
 
     Args:
-    -----
-    struct : ase.Atoms
-        Atoms object containing the atomic structure.
-    criteria : dict
-        A dictionary of criteria to check, which contains pairs of {'criteria_name': threshold_value}.
-        Available criteria:
-        - `length_ratio`: The ratio of the longest to the shortest cell vector.
-          - Formula: max(|a|, |b|, |c|) / min(|a|, |b|, |c|)
-          - Prevents highly elongated simulation boxes.
-        - `wrap_ratio`: Checks if one cell vector component is excessively wrapped around another.
-          - Formula: [b_x / a_x, c_y / b_y, c_x / a_x]
-          - Prevents excessive skewing.
-        - `tilt_ratio`: Measures tilting of cell vectors relative to their axes.
-          - Formula: [b_x / b_y, c_y / c_z, c_x / c_z]
-          - Avoids excessive tilting that may disrupt periodic boundaries.
+        struct (ase.Atoms): Atoms object containing the atomic structure.
+        criteria (dict): A dictionary of criteria to check, which contains pairs of {'criteria_name': threshold_value}.
+            Available criteria:
+            - `length_ratio`: The ratio of the longest to the shortest cell vector.
+            - Formula: max(|a|, |b|, |c|) / min(|a|, |b|, |c|)
+            - Prevents highly elongated simulation boxes.
+            - `wrap_ratio`: Checks if one cell vector component is excessively wrapped around another.
+            - Formula: [b_x / a_x, c_y / b_y, c_x / a_x]
+            - Prevents excessive skewing.
+            - `tilt_ratio`: Measures tilting of cell vectors relative to their axes.
+            - Formula: [b_x / b_y, c_y / c_z, c_x / c_z]
+            - Avoids excessive tilting that may disrupt periodic boundaries.
 
     Returns:
-    --------
-    is_bad : bool
-        True if the simulation box violates any of the given criteria, otherwise False.
+        is_bad (bool): True if the simulation box violates any of the given criteria, otherwise False.
 
     Raises:
-    -------
-    RuntimeError
-        If an unknown criterion key is provided.
+        RuntimeError: If an unknown criterion key is provided.
     """
     cell = struct.cell.array
 

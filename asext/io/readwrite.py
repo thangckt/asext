@@ -40,7 +40,7 @@ def read_extxyz(extxyz_file: str, index=":") -> list[Atoms]:
     struct_list = read(extxyz_file, format="extxyz", index=index)
     if not isinstance(struct_list, list):  # Ensure the result is always a list
         struct_list = [struct_list]
-    return struct_list
+    return struct_list  # type: ignore
 
 
 def write_extxyz(outfile: str, structs: list[Atoms] | Atoms) -> None:
@@ -114,10 +114,10 @@ def write_lmpdata(
     write_lammps_data(
         file,
         atoms,
-        specorder=specorder,  # type: ignore
+        specorder=specorder,
         reduce_cell=reduce_cell,
         force_skew=force_skew,
-        prismobj=prismobj,  # type: ignore
+        prismobj=prismobj,
         write_image_flags=write_image_flags,
         masses=masses,
         velocities=velocities,

@@ -1,0 +1,8 @@
+mystmd
+myst-parser
+sphinx-ext-mystmd
+git+https://github.com/jupyter-book/sphinx-ext-mystmd@main
+sphinx<8
+numpy
+ase
+polars

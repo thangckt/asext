@@ -7,13 +7,14 @@ extends:
 site:
   template: book-theme
   options:
-    # style: media/custom.css
-    folders: true
-    favicon: ./1images/one-note-128-o.png
-    logo: ./1images/one-note-128-o.png
     logo_text: asext
-#   parts:
-#     footer: _site/footer.md
+    logo: ./1images/one-note-128-o.png
+    favicon: ./1images/one-note-128-o.png
+    folders: true
+    analytics_google: G-QM7DWGY7ZT
+  parts:
+    footer: Copyright &copy; 2021 <a href="https://thangckt.github.io">thangckt</a>  # _site/footer.md
+    primary_sidebar_footer: ''
 
 project:
   # title:
@@ -43,10 +44,10 @@ project:
 
   toc:
     - file: index.md
-    # - file: api.md
     - title: API Reference
       children:
-        - pattern: sphinx_api/_api_output/**/*.myst.json
+        - pattern: sphinx_doc/_apidoc/**.myst.json
+    # - pattern: sphinx_doc/_apidoc/**.myst.json
 
     - title: Author
       url: http://thangckt.github.io
@@ -80,33 +81,3 @@ project:
     #     - file: execution/execution.md
     #     - file: execution/jupyterlab.md
     #     - file: execution/generate-myst.md
-    # - title: Extend with Plugins
-    #   file: plugins.md
-    #   children:
-    #     - file: plugins/plugins.md
-    #     - file: plugins/directives-and-roles.md
-    #     - file: plugins/debug.md
-    #     - file: plugins/ast.md
-    #     - file: plugins/dependencies.md
-    # - title: Community
-    #   file: community.md
-    #   children:
-    #     - file: community/help.md
-    #     - file: community/vote.md
-    #     - file: community/roadmap.md
-    #     - file: community/team.md
-    #     - file: community/ecosystem.md
-    #     - file: community/history.md
-    # - title: Contributing
-    #   file: contribute.md
-    #   children:
-    #     - file: contribute/docs.md
-    #     - file: contribute/code.md
-    # - title: Resources
-    #   children:
-    #     - file: cite.md
-    #     - file: resources/faq.md
-    #     - file: resources/upgrade.md
-    #     - file: resources/downgrade.md
-    #     - file: resources/glossary.md
-    # - file: gallery.md

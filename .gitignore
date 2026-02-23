@@ -22,8 +22,8 @@ __pycache__
 site/
 build/
 _build/
-_docs/sphinx_api/_api_output/
-_docs/sphinx_api/apidocs/
+_docs/_build/
+_docs/sphinx_doc/_apidoc/
 /dist
 /MANIFEST
 *.egg-info

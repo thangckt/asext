@@ -8,30 +8,33 @@ project = "API Documentation"
 extensions = [
     "myst_parser",
     "sphinx_ext_mystmd",
-    "autodoc2",
-    # "sphinx.ext.autodoc",
+    "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",  # for Google style docstrings
+    "sphinx.ext.autosummary",
 ]
 numfig = True
 
-#####ANCHOR  autodoc2 config
-autodoc2_packages = [
-    {
-        "path": "../../asext",
-        "module": "asext",
-        "exclude_files": ["_version.py"],
-    }
-]
+#####ANCHOR Sphinx extensions
+### autodoc for API documentation
+autodoc_default_options = {
+    "member-order": "bysource",
+    "members": True,
+    "undoc-members": True,
+    "show-inheritance": True,
+}
 
-autodoc2_render_plugin = "myst"
-autodoc2_hidden_objects = [
-    "private",
-    "dunder",
-    "inherited",
-]
-autodoc2_skip_module_regexes = [
-    "_version",
-]
+# autosummary_generate = True
+
+### napoleon for Google style docstrings
+napoleon_google_docstring = True
+napoleon_numpy_docstring = False
+napoleon_use_admonition_for_examples = True
+
+# Quality-of-life (recommended)
+# napoleon_include_init_with_doc = True
+# napoleon_include_private_with_doc = False
+# napoleon_use_param = True
+# napoleon_use_rtype = True
 
 
 #####ANCHOR  MyST config
@@ -40,14 +43,3 @@ myst_enable_extensions = [
     "deflist",
     "fieldlist",
 ]
-
-
-#####ANCHOR napoleon for Google style docstrings
-napoleon_google_docstring = True
-napoleon_numpy_docstring = False
-
-# Quality-of-life (recommended)
-# napoleon_include_init_with_doc = True
-# napoleon_include_private_with_doc = False
-# napoleon_use_param = True
-# napoleon_use_rtype = True
