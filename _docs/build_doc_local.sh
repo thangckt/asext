@@ -35,7 +35,7 @@ conda activate "${conda_env}"
 # conda install --update-specs -y -c conda-forge python=${python_ver}
 # conda config --set solver classic  # libmamba vs. classic
 
-# pip install -r requirement.txt
+pip install -r requirement.txt
 
 echo -e "\nTASK: Check conda env"
 echo "Python: $(python -c 'import sys;print(sys.version)')"
@@ -50,14 +50,14 @@ rm -rf sphinx_doc/_apidoc sphinx_doc/_toctree
 sphinx-build -b myst sphinx_doc sphinx_doc/_apidoc
 
 ### 2. Build the full docs using MyST
+rm -rf sphinx_doc/_apidoc/asext.myst.json # remove redundant docs
 rm -rf _build
-# myst build --html
 
+# myst build --html
 myst start
 
 # or
-# myst start &
-# sleep 2
+# myst start & sleep 2
 # xdg-open http://localhost:3000
 
 cd "${rundir}"

@@ -10,7 +10,10 @@
 
 ```{eval-rst}
 .. automodule:: asext
+    :members:
+    :undoc-members:
 ```
+
 
 ## cell
 

@@ -11,6 +11,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",  # for Google style docstrings
     "sphinx.ext.autosummary",
+    "sphinx_autodoc_typehints",
 ]
 numfig = True
 # maximum_signature_line_length = 40
@@ -21,9 +22,11 @@ autodoc_default_options = {
     "member-order": "bysource",
     "members": True,
     "undoc-members": True,
+    "private-members": False,
     "show-inheritance": True,
 }
 
+autodoc_typehints = "both"
 # autosummary_generate = True
 
 ### napoleon for Google style docstrings
@@ -32,9 +35,7 @@ napoleon_numpy_docstring = False
 napoleon_use_admonition_for_examples = True
 napoleon_use_param = True
 napoleon_use_rtype = True
-
-# Quality-of-life (recommended)
-# napoleon_include_init_with_doc = True
+napoleon_include_init_with_doc = True
 # napoleon_include_private_with_doc = False
 
 

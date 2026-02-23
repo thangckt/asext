@@ -15,6 +15,9 @@ site:
   parts:
     footer: Copyright &copy; 2021 <a href="https://thangckt.github.io">thangckt</a>  # _site/footer.md
     primary_sidebar_footer: ''
+  # nav:
+  #   - title: Author
+  #     url: http://thangckt.github.io
 
 project:
   # title:
