@@ -13,6 +13,7 @@ extensions = [
     "sphinx.ext.autosummary",
 ]
 numfig = True
+maximum_signature_line_length = 40
 
 #####ANCHOR Sphinx extensions
 ### autodoc for API documentation
@@ -29,12 +30,12 @@ autodoc_default_options = {
 napoleon_google_docstring = True
 napoleon_numpy_docstring = False
 napoleon_use_admonition_for_examples = True
+napoleon_use_param = True
+napoleon_use_rtype = True
 
 # Quality-of-life (recommended)
 # napoleon_include_init_with_doc = True
 # napoleon_include_private_with_doc = False
-# napoleon_use_param = True
-# napoleon_use_rtype = True
 
 
 #####ANCHOR  MyST config
