@@ -13,7 +13,7 @@ extensions = [
     "sphinx.ext.autosummary",
 ]
 numfig = True
-maximum_signature_line_length = 40
+# maximum_signature_line_length = 40
 
 #####ANCHOR Sphinx extensions
 ### autodoc for API documentation
