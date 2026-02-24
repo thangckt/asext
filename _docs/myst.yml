@@ -12,6 +12,7 @@ site:
     favicon: ./1images/one-note-128-o.png
     folders: true
     analytics_google: G-QM7DWGY7ZT
+    style: ./_extra_theme/css/all.css
   parts:
     footer: Copyright &copy; 2021 <a href="https://thangckt.github.io">thangckt</a>  # _site/footer.md
     primary_sidebar_footer: ''

@@ -11,10 +11,8 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",  # for Google style docstrings
     "sphinx.ext.autosummary",
-    "sphinx_autodoc_typehints",
 ]
 numfig = True
-# maximum_signature_line_length = 40
 
 #####ANCHOR Sphinx extensions
 ### autodoc for API documentation
@@ -31,7 +29,7 @@ autodoc_typehints = "both"
 
 ### napoleon for Google style docstrings
 napoleon_google_docstring = True
-napoleon_numpy_docstring = False
+# napoleon_numpy_docstring = False
 napoleon_use_admonition_for_examples = True
 napoleon_use_param = True
 napoleon_use_rtype = True

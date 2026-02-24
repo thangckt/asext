@@ -42,6 +42,9 @@ echo "Python: $(python -c 'import sys;print(sys.version)')"
 echo "Python path: $(which python)"
 echo "CONDA_PREFIX: ${CONDA_PREFIX}"
 
+#####ANCHOR Prepare extra CSS
+cat _extra_theme/css/*.css >_extra_theme/css/all.css
+
 #####ANCHOR Build steps
 rundir=$(pwd)
 

@@ -1,0 +1,43 @@
+/* Extend myst theme with custom CSS */
+/* REF: https://github.com/OpenSourceEconomics/pylcm/pull/246/changes#diff-b8f7ff5829fcbf6afe5c2c4b6c6bb18117bda1fe45ce871983f9ddf36f95dff8 */
+
+/* Background color in dark mode */
+.dark .body {
+    background-color: #0e1116;
+}
+
+
+/* Remove white background on logo in dark mode. */
+.dark .myst-home-link-logo {
+    background-color: transparent !important;
+}/* Extend myst theme with custom CSS */
+/* REF: https://github.com/OpenSourceEconomics/pylcm/pull/246/changes#diff-b8f7ff5829fcbf6afe5c2c4b6c6bb18117bda1fe45ce871983f9ddf36f95dff8 */
+
+
+/* Remove execution count for notebook cells. */
+div.prompt {
+    display: none;
+}/* Styles for sphinx-ext-mystmd API docs rendered in MyST book-theme */
+/* REF: https://github.com/englacial/xopr/pull/71/changes#diff-5f11aa9546a783e265e6f08d27cf4c3a640b8021f812cb681a98c8c921a05086 */
+
+/* Signature lines (Parameter line): allow wrapping and indent continuation lines */
+.sphinx-desc-parameterlist {
+    white-space: normal;
+    overflow-wrap: break-word;
+    display: inline-block;
+    margin-left: 2em;
+}
+
+/* Function name and return styling */
+.sphinx-desc-name {
+    margin-right: -2em;
+    color: lime;
+}
+
+.sphinx-desc-addname {
+    color: cyan;
+}
+
+.sphinx-desc-returns {
+    color: #f472b6;
+}

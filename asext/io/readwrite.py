@@ -70,7 +70,8 @@ def read_lmpdump(lmpdump_file: str, index=-1, units="metal", **kwargs) -> list[A
     Returns:
         list: List of Atoms object.
 
-    Note: Original `ase.io.lammpsrun.read_lammps_dump` accepts only `fileobj`, this function accepts `lmpdump_file` as file path.
+    Note:
+        Original `ase.io.lammpsrun.read_lammps_dump` accepts only `fileobj`, this function accepts `lmpdump_file` as file path.
     """
     with Path(lmpdump_file).open("r") as fileobj:
         struct_list = read_lammps_dump_text(fileobj, index=index, units=units, **kwargs)

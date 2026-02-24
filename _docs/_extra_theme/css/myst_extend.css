@@ -1,0 +1,13 @@
+/* Extend myst theme with custom CSS */
+/* REF: https://github.com/OpenSourceEconomics/pylcm/pull/246/changes#diff-b8f7ff5829fcbf6afe5c2c4b6c6bb18117bda1fe45ce871983f9ddf36f95dff8 */
+
+
+/* Remove white background on logo in dark mode. */
+.dark .myst-home-link-logo {
+    background-color: transparent !important;
+}
+
+/* Remove execution count for notebook cells. */
+div.prompt {
+    display: none;
+}
