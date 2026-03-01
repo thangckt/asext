@@ -16,6 +16,7 @@ theme:
   highlightjs: true
   features:
     - content.code.annotate
+    - content.code.copy
     - navigation.expand
     # - navigation.sections
     - navigation.indexes
@@ -58,11 +59,11 @@ theme:
 
 ### Extra theme
 extra_javascript:
-  # - _extra_theme/extra_js/gg_adsense.js
+  # - _extra_theme/js/gg_adsense.js
   - 1thang_js/gas_ip_logger.js
 extra_css:
-  - _extra_theme/extra_css/full_width.css
-  - _extra_theme/extra_css/font_size.css
+  - _extra_theme/css/full_width.css
+  - _extra_theme/css/font_size.css
 
 
 ## Customization
@@ -126,11 +127,6 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.keys
   - pymdownx.magiclink:
       repo_url_shorthand: true
@@ -138,13 +134,18 @@ markdown_extensions:
       repo: mkdocs-material
   - pymdownx.mark
   - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
 
-## Plugins
+### Plugins
 plugins:
   - search
   - autorefs
@@ -183,6 +184,11 @@ plugins:
           # import:
           #   - https://docs.python.org/3/objects.inv
           #   - https://mkdocstrings.github.io/autorefs/objects.inv
+  # - enumerate-headings
+
+  # - jupyterlite:
+  #     enabled: true  # An easy way to turn off the entire plugin.
+
 ###=======================================
 ### Site content
 ###=======================================
