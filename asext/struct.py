@@ -87,7 +87,7 @@ def set_vacuum(input_struct: Atoms, distances: list = [0.0, 0.0, 0.0]) -> Atoms:
     Returns:
         struct: A new Atoms object with an expanded cell and centered atoms.
 
-    Notes:
+    Note:
         - `atoms.center()` sets vacuum on both sides of the cell along the specified axis. So the total vacuum is *twice the input value*. This function is different in that, it set total vacuum equal to the input value.
     """
     assert len(distances) == 3, "'distances' must be a list of 3 floats."
