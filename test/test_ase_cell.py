@@ -3,11 +3,13 @@
 
 import numpy as np
 import pytest
-from ase import Atoms
-from ase.test.calculator.lammps.test_prism import make_array
-from asext.cell import AseCell, CellTransform
-from asext.struct import check_bad_box
 from numpy.testing import assert_allclose
+
+from ase import Atoms
+from ase.calculators.singlepoint import SinglePointCalculator
+from ase.test.calculator.lammps.test_prism import make_array
+from asext.cell import AseCell, CellTransform, rotate_struct_property
+from asext.struct import check_bad_box
 
 
 #####ANCHOR Test AseCell
@@ -22,7 +24,7 @@ def test_lower_triangular_form():
             rcell, Q = cell.lower_triangular_form()
             assert_allclose(rcell @ Q, cell, atol=TOL)
             assert_allclose(np.linalg.det(rcell), np.linalg.det(cell))
-            assert_allclose(rcell.ravel()[[1, 2, 5]], 0, atol=TOL)
+            assert_allclose(rcell.ravel()[[1, 2, 5]], 0, atol=TOL)  # ty: ignore
 
 
 def test_upper_triangular_form():
@@ -36,7 +38,7 @@ def test_upper_triangular_form():
             rcell, Q = cell.upper_triangular_form()
             assert_allclose(rcell @ Q, cell, atol=TOL)
             assert_allclose(np.linalg.det(rcell), np.linalg.det(cell))
-            assert_allclose(rcell.ravel()[[3, 6, 7]], 0, atol=TOL)
+            assert_allclose(rcell.ravel()[[3, 6, 7]], 0, atol=TOL)  # ty: ignore
 
 
 #####ANCHOR Test CellTransform
@@ -47,7 +49,7 @@ ref_stress = np.array([[1, 5, 7], [2, 1, 4], [3, 5, 1]])
 @pytest.mark.parametrize("wrap", (False, True))
 @pytest.mark.parametrize("pbc", (False, True))
 def test_cell_transform(structure: str, pbc: bool, wrap: bool):
-    """Test if vector conversion works as expected"""
+    """Test if vector conversion works as expected."""
     rng = np.random.default_rng(42)
     positions = 20.0 * rng.random((10, 3)) - 10.0
     array = make_array(structure)
@@ -72,6 +74,21 @@ def test_check_bad_box():
     atoms1 = Atoms(cell=ortho_cell)
     atoms2 = Atoms(cell=bad_wrap_cell)
     atoms3 = Atoms(cell=bad_tilt_cell)
-    assert check_bad_box(atoms1) == False
-    assert check_bad_box(atoms2) == True
-    assert check_bad_box(atoms3) == True
+    assert not check_bad_box(atoms1)
+    assert check_bad_box(atoms2)
+    assert check_bad_box(atoms3)
+
+
+def test_rotate_struct_property_keeps_stress_voigt_shape():
+    atoms = Atoms("Na", positions=[[0.1, 0.2, 0.3]], cell=np.eye(3), pbc=True)
+    atoms.calc = SinglePointCalculator(
+        atoms=atoms, stress=np.array([1, 2, 3, 4, 5, 6], dtype=float)
+    )
+
+    rotated = rotate_struct_property(
+        atoms, np.array([[0.0, -1.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, 1.0]])
+    )
+
+    assert rotated.calc is not None
+    stress = rotated.calc.results["stress"]
+    assert np.shape(stress) == (6,)
