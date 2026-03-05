@@ -1,15 +1,20 @@
 import random
+from collections.abc import Sequence
 from typing import cast
 
 import numpy as np
+
 from ase.atoms import Atoms
+from ase.io import read
 
 # from ase import units
-from ase.io import read
 
 
 #####ANCHOR ASE atoms manipulation
-def strain_struct(input_struct: Atoms, strains: list[float] = [0.0, 0, 0]) -> Atoms:
+def strain_struct(
+    input_struct: Atoms,
+    strains: Sequence[float] = (0.0, 0.0, 0.0),
+) -> Atoms:
     """Apply engineering strain to an ASE Atoms structure along lattice vectors a, b, c.
 
     Args:
@@ -19,12 +24,13 @@ def strain_struct(input_struct: Atoms, strains: list[float] = [0.0, 0, 0]) -> At
     Returns:
         atoms (Atoms): New strained structure with scaled cell and atom positions.
     """
-    strains = np.asarray(strains, dtype=float)  # type: ignore
-    assert strains.shape == (3,), "'factors' must be a sequence of 3 floats."  # type: ignore
+    strains_arr = np.asarray(strains, dtype=float)
+    if strains_arr.shape != (3,):
+        raise ValueError("'strains' must be a sequence of 3 floats.")
 
     struct = input_struct.copy()
     cell = struct.cell.array
-    scaled_cell = np.array([cell[i] * (1.0 + strains[i]) for i in range(3)])
+    scaled_cell = np.array([cell[i] * (1.0 + strains_arr[i]) for i in range(3)])
     struct.set_cell(scaled_cell, scale_atoms=True)
     return struct
 
@@ -40,7 +46,11 @@ def perturb_struct(struct: Atoms, std_disp: float) -> Atoms:
     return struct
 
 
-def slice_struct(struct_in: Atoms, slice_num=(1, 1, 1), tol=1.0e-5) -> Atoms:
+def slice_struct(
+    struct_in: Atoms,
+    slice_num: Sequence[float] = (1, 1, 1),
+    tol: float = 1.0e-5,
+) -> Atoms:
     """Slice structure into the first subcell by given numbers along a, b, c (cell vector) directions."""
     struct = struct_in.copy()
     cell = struct.cell.array
@@ -76,7 +86,7 @@ def align_struct_min_pos(struct: Atoms) -> Atoms:
     return struct
 
 
-def set_vacuum(input_struct: Atoms, distances: list = [0.0, 0.0, 0.0]) -> Atoms:
+def set_vacuum(input_struct: Atoms, distances: Sequence[float] = (0.0, 0.0, 0.0)) -> Atoms:
     """This function *sets* vacuum along cell vectors a, b, c.
 
     Args:
@@ -86,10 +96,11 @@ def set_vacuum(input_struct: Atoms, distances: list = [0.0, 0.0, 0.0]) -> Atoms:
     Returns:
         struct: A new Atoms object with an expanded cell and centered atoms.
 
-    Notes:
+    Note:
         - `atoms.center()` sets vacuum on both sides of the cell along the specified axis. So the total vacuum is *twice the input value*. This function is different in that, it set total vacuum equal to the input value.
     """
-    assert len(distances) == 3, "'distances' must be a list of 3 floats."
+    if len(distances) != 3:
+        raise ValueError("'distances' must be a sequence of 3 floats.")
 
     struct = input_struct.copy()
     for i in range(3):
@@ -101,9 +112,13 @@ def set_vacuum(input_struct: Atoms, distances: list = [0.0, 0.0, 0.0]) -> Atoms:
 #####ANCHOR: ASE check structure
 def check_bad_box_extxyz(
     extxyz_file: str,
-    criteria: dict = {"length_ratio": 100, "wrap_ratio": 0.5, "tilt_ratio": 0.5},
+    criteria: dict | None = None,
 ) -> bool:
     """Check structure in extxyz file whether it has bad box.
+
+    Args:
+        extxyz_file (str): Path to the extxyz file containing the structure to check.
+        criteria (dict, optional): A dictionary of criteria to check
 
     Return:
         a file remarking the bad box frames.
@@ -115,7 +130,7 @@ def check_bad_box_extxyz(
 
 def check_bad_box(
     struct: Atoms,
-    criteria: dict = {"length_ratio": 20, "wrap_ratio": 0.5, "tilt_ratio": 0.5},
+    criteria: dict | None = None,
 ) -> bool:
     """Check if a simulation box is "bad" based on given criteria.
 
@@ -146,28 +161,46 @@ def check_bad_box(
     RuntimeError
         If an unknown criterion key is provided.
     """
+    eps = 1.0e-12
+
+    ### Helper functions
+    def _safe_ratio(num: float, den: float) -> float:
+        if abs(den) < eps:
+            return np.inf if abs(num) >= eps else 0.0
+        return num / den
+
+    default_criteria = {"length_ratio": 20, "wrap_ratio": 0.5, "tilt_ratio": 0.5}
+    if criteria is None:
+        criteria = default_criteria
+    else:
+        default_criteria.update(
+            criteria
+        )  # Use provided criteria, but fill in any missing ones with defaults
+        criteria = default_criteria
+
     cell = struct.cell.array
 
     is_bad = False
     for key, value in criteria.items():
         if key == "length_ratio":
             lens = np.linalg.norm(cell, axis=1)
-            ratio = np.max(lens) / np.min(lens)
+            min_len = np.min(lens)
+            ratio = np.inf if min_len < eps else float(np.max(lens) / min_len)
             if ratio > value:
                 is_bad = True
         elif key == "wrap_ratio":
             ratio = [
-                cell[1, 0] / cell[0, 0],
-                cell[2, 1] / cell[1, 1],
-                cell[2, 0] / cell[0, 0],
+                _safe_ratio(cell[1, 0], cell[0, 0]),
+                _safe_ratio(cell[2, 1], cell[1, 1]),
+                _safe_ratio(cell[2, 0], cell[0, 0]),
             ]
             if np.max(np.abs(ratio)) > value:
                 is_bad = True
         elif key == "tilt_ratio":
             ratio = [
-                cell[1, 0] / cell[1, 1],
-                cell[2, 1] / cell[2, 2],
-                cell[2, 0] / cell[2, 2],
+                _safe_ratio(cell[1, 0], cell[1, 1]),
+                _safe_ratio(cell[2, 1], cell[2, 2]),
+                _safe_ratio(cell[2, 0], cell[2, 2]),
             ]
             if np.max(np.abs(ratio)) > value:
                 is_bad = True

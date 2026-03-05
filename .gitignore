@@ -21,6 +21,7 @@ __pycache__
 ### Build files
 /site
 /build
+/_build
 /dist
 /MANIFEST
 *.egg-info

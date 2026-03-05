@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
+
 from ase import Atoms
 from ase.build import bulk
-
-from asext.struct import set_vacuum
+from asext.struct import check_bad_box, set_vacuum
 
 # TODO: Add all tests for ase_struct.py
 
@@ -39,8 +39,13 @@ class TestAddVacuum:
     def test_set_vacuum_invalid_distances(self):
         cell = np.eye(3) * 5.0
         atoms = Atoms("Na", positions=[[0, 0, 0]], cell=cell, pbc=True)
-        with pytest.raises(AssertionError):
+        with pytest.raises(ValueError):
             set_vacuum(atoms, [1.0, 2.0])
+
+
+def test_check_bad_box_degenerate_cell_does_not_crash():
+    atoms = Atoms(cell=np.array([[0.0, 0.0, 0.0], [1.0, 0.1, 0.0], [0.0, 0.0, 1.0]]))
+    assert check_bad_box(atoms) is True
 
     # def test_set_vacuum_zero_vector(self):
     #     cell = np.zeros((3, 3))
