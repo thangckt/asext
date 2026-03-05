@@ -198,7 +198,7 @@ def rotate_struct_property(
     Note:
         - Important note: `deepcopy(struct)` copies the `struct.calc` object, but `struct.copy()` does not.
     """
-    from ase.stress import voigt_6_to_full_3x3_stress  # full_3x3_to_voigt_6_stress
+    from ase.stress import full_3x3_to_voigt_6_stress, voigt_6_to_full_3x3_stress
 
     custom_vector_props = custom_vector_props or []
     custom_tensor_props = custom_tensor_props or []
@@ -223,7 +223,7 @@ def rotate_struct_property(
         if "stress" in res:  # stress is in Voigt notation
             stress_3x3 = voigt_6_to_full_3x3_stress(res["stress"])
             stress_3x3_rotate = rot.tensor_forward(stress_3x3)
-            struct.calc.results["stress"] = stress_3x3_rotate
+            struct.calc.results["stress"] = full_3x3_to_voigt_6_stress(stress_3x3_rotate)
 
     ### Rotate custom properties
     for prop in custom_vector_props:
@@ -232,7 +232,8 @@ def rotate_struct_property(
     for prop in custom_tensor_props:
         if prop in struct.info:
             tensor = np.asarray(struct.info[prop])
-            assert tensor.shape == (3, 3), f"Tensor property {prop} must be a 3x3 matrix."
+            if tensor.shape != (3, 3):
+                raise ValueError(f"Tensor property {prop} must be a 3x3 matrix.")
             struct.info[prop] = rot.tensor_forward(tensor)
     return struct
 

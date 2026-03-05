@@ -21,7 +21,7 @@ from asext.cell import rotate_struct_property
 
 
 #####ANCHOR: Read/Write extxyz file
-def read_extxyz(extxyz_file: str, index=":") -> list[Atoms]:
+def read_extxyz(extxyz_file: str, index: int | slice | str = ":") -> list[Atoms]:
     """Read extxyz file. The existing `ase.io.read` returns a single Atoms object if file contains only one frame. This function will return a list of Atoms object.
 
     Args:
@@ -56,7 +56,12 @@ def write_extxyz(outfile: str, structs: list[Atoms] | Atoms) -> None:
 
 
 #####ANCHOR: Read/Write LAMMPS data file
-def read_lmpdump(lmpdump_file: str, index=-1, units="metal", **kwargs) -> list[Atoms]:
+def read_lmpdump(
+    lmpdump_file: str,
+    index: int | list[int] | slice = -1,
+    units: str = "metal",
+    **kwargs,
+) -> list[Atoms]:
     """Shortcut to `ase.io.lammpsrun.read_lammps_dump` function.
 
     Args:
@@ -162,7 +167,11 @@ def extxyz2lmpdata(
     return atom_names, pbc
 
 
-def lmpdata2extxyz(lmpdata_file: str, extxyz_file: str, original_cell_file: str | None = None):
+def lmpdata2extxyz(
+    lmpdata_file: str,
+    extxyz_file: str,
+    original_cell_file: str | None = None,
+) -> None:
     """Convert LAMMPS data file to extxyz file."""
     from ase.stress import voigt_6_to_full_3x3_stress  # full_3x3_to_voigt_6_stress
 
@@ -199,7 +208,7 @@ def lmpdump2extxyz(
     original_cell_file: str | None = None,
     stress_file: str | None = None,
     lammps_units: str = "metal",
-):
+) -> None:
     ### Ref: /ase/io/lammpsrun.py; /ase/calculators/lammpslib.py/propagate()
     """Convert LAMMPS dump file to extxyz file.
 
@@ -236,7 +245,7 @@ def lmpdump2extxyz(
         ### map stress
         if stress_file is not None:
             timestep = struct.info.get("timestep", None)
-            if timestep:
+            if timestep is not None:
                 df = stress_df.filter(pl.col("time") == timestep)
                 if df.height > 0:
                     stress = [df[k][0] for k in ["pxx", "pyy", "pzz", "pyz", "pxz", "pxy"]]
@@ -270,7 +279,7 @@ def lmpdump2extxyz(
 
 
 ####ANCHOR: Support functions
-def _get_symbols_by_types(atoms: Atoms):
+def _get_symbols_by_types(atoms: Atoms) -> list[str]:
     unique_types, first_idx = np.unique(atoms.arrays["type"], return_index=True)
     symbols_by_type = [atoms.symbols[i] for i in first_idx]
     return symbols_by_type
