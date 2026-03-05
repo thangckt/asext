@@ -202,7 +202,7 @@ nav:
       - About: index.md
       # - Schema:
       #   - Schema for remote machines: schema_doc/config_remotes.md
-      - API reference:
+      - API reference: api/api.md
         - api/api.md
       # - Changelog: CHANGELOG.md
 
