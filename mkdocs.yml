@@ -200,17 +200,10 @@ nav:
   - thkit: http://thangckt.github.io/thkit_doc
   - asext:
       - About: index.md
-      - Modules:
-        - cell: cell.md
-        - struct: struct.md
-        - io: io.md
-      #   - path: path.md
-      #   - pkg: pkg.md
-      #   - stuff: stuff.md
-
       # - Schema:
       #   - Schema for remote machines: schema_doc/config_remotes.md
-      - API reference: api.md
+      - API reference:
+        - api/api.md
       # - Changelog: CHANGELOG.md
 
   - thmd: http://thangckt.github.io/thmd_doc
