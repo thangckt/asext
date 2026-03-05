@@ -200,9 +200,7 @@ nav:
   - thkit: http://thangckt.github.io/thkit_doc
   - asext:
       - About: index.md
-      # - Schema:
-      #   - Schema for remote machines: schema_doc/config_remotes.md
-      - API reference: api/api.md
+      - API reference:
         - api/api.md
       # - Changelog: CHANGELOG.md
 
