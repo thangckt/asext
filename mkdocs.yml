@@ -59,7 +59,7 @@ theme:
 ### Extra theme
 extra_javascript:
   # - _extra_theme/js/gg_adsense.js
-  - 1thang_js/gas_ip_logger.js
+  - 1thang_js/page_logVisitor.js   # fetch by code before build
 extra_css:
   - _extra_theme/css/full_width.css
   - _extra_theme/css/font_size.css
