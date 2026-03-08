@@ -170,6 +170,7 @@ plugins:
             filters:
               - "!^_[^_]"  # exclude private members
               - "!__email__"
+              - "!^_retired_"   # exclude members that start with "_retired_"
             show_submodules: true
             show_root_heading: true
             show_category_heading: false
