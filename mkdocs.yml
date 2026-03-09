@@ -166,7 +166,6 @@ plugins:
               ignore_init_summary: true
             docstring_section_style: "list" # 'table', 'list', 'spacy'
             docstring_style: "google" # Docstrig options: google, numpy, sphinx
-            heading_level: 1
             parameter_headings: false
             inherited_members: true # member options
             merge_init_into_class: true
