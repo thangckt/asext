@@ -4,10 +4,9 @@ site_author: C.Thang Nguyen
 # edit_uri: "https://github.com/thangckt/src_thatool/tree/main/docs"
 docs_dir: _docs
 
-## Copyright
 copyright: Copyright &copy; 2022 <a href="https://thangckt.github.io">thangckt</a>
 
-## Configuration
+#####ANCHOR Theme
 theme:
   name: materialx   # material  materialx  readthedocs  rtd-dropdown  windmill  bootswatch
   custom_dir: _docs/_overrides
@@ -32,9 +31,11 @@ theme:
     - navigation.tabs.sticky
     - navigation.tabs.header # only with fork repo
 
-  # topbar_style: glass   # glass  primary  accent
+  topbar_style: glass   # glass  primary  accent
   palette:
-    scheme: slate
+    scheme: slate       # default (light),  slate (dark)
+    # primary: blue grey   #  blue grey, indigo
+
     ### Palette toggle for light mode
     # - media: "(prefers-color-scheme: light)"
     # scheme: default
@@ -56,16 +57,16 @@ theme:
   #   text: Roboto
   #   code: Roboto Mono
 
-### Extra theme
-extra_javascript:
-  # - _extra_theme/js/gg_adsense.js
-  - 1thang_js/page_logVisitor.js   # fetch by code before build
+#####ANCHOR Extra CSS and JS
 extra_css:
   - _extra_theme/css/full_width.css
   - _extra_theme/css/font_size.css
 
+extra_javascript:
+  # - _extra_theme/js/gg_adsense.js
+  - 1thang_js/page_logVisitor.js   # fetch by code before build
 
-## Customization
+#####ANCHOR Customization
 extra:
   generator: false
   analytics:
@@ -100,7 +101,7 @@ extra:
   #   default: latest
 
 
-### Extensions
+#####ANCHOR Markdown Extensions
 markdown_extensions:
   - admonition
   - pymdownx.superfences
@@ -113,7 +114,8 @@ markdown_extensions:
   - footnotes
   - md_in_html
   - toc:
-      permalink: true
+      permalink: "¤" # true
+      toc_depth: 4
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.betterem:
@@ -145,27 +147,29 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 
-### Plugins
+#####ANCHOR Plugins
 plugins:
-  - search: {}
-  - autorefs
   - mkdocstrings:
       handlers:
         python:
           inventories:
           - https://docs.python.org/3/objects.inv
-          - https://mkdocstrings.github.io/objects.inv
+          - https://installer.readthedocs.io/en/stable/objects.inv  # demonstration purpose in the docs
           - https://mkdocstrings.github.io/autorefs/objects.inv
-          - https://mkdocstrings.github.io/griffe/objects.inv
+          - https://www.mkdocs.org/objects.inv
           - https://python-markdown.github.io/objects.inv
+          - https://jinja.palletsprojects.com/en/stable/objects.inv
+          - https://markupsafe.palletsprojects.com/en/stable/objects.inv
           options: # https://mkdocstrings.github.io/python/usage/#globallocal-options
             backlinks: tree
             docstring_options:
               ignore_init_summary: true
-            docstring_style: "google" # Docstrig options: google, numpy, sphinx
             docstring_section_style: "list" # 'table', 'list', 'spacy'
+            docstring_style: "google" # Docstrig options: google, numpy, sphinx
+            heading_level: 1
             parameter_headings: false
             inherited_members: true # member options
+            merge_init_into_class: true
             members_order: "source"
             filters:
               - "!^_[^_]"  # exclude private members
@@ -179,22 +183,29 @@ plugins:
             show_source: false
             show_signature_annotations: true
             show_if_no_docstring: true
-            merge_init_into_class: true
+            separate_signature: true
             summary: true
           # path: [.]
-          # import:
-          #   - https://docs.python.org/3/objects.inv
-          #   - https://mkdocstrings.github.io/autorefs/objects.inv
-  # - enumerate-headings
 
+  - search: {}
+  - autorefs
+  - blog:
+      blog_toc: true
+      # post_dir: "{blog}/posts"
+  # - encryptcontent: {}   # set password for content: https://github.com/unverbuggt/mkdocs-encryptcontent-plugin
+  # - meta    # only insider
+  # - enumerate-headings
   - mkdocs-jupyter:
+      theme: dark
       execute: false
       include: ["*.ipynb"] # Default: ["*.py", "*.ipynb"]
       ignore: ["some-irrelevant-files/*.ipynb"]
+  - git-revision-date-localized:
+      enabled: !ENV [DEPLOY, false]
+      enable_creation_date: true
+      type: timeago
 
-###=======================================
-### Site content
-###=======================================
+#####ANCHOR Site content
 nav:
   - home: http://thangckt.github.io
   - alff: http://thangckt.github.io/alff_doc
