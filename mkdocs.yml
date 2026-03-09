@@ -182,7 +182,7 @@ plugins:
             show_source: false
             show_signature_annotations: true
             show_if_no_docstring: true
-            separate_signature: true
+            # separate_signature: true
             summary: true
           # path: [.]
 
