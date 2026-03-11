@@ -109,7 +109,7 @@ def set_vacuum(input_struct: Atoms, distances: Sequence[float] = (0.0, 0.0, 0.0)
     return struct
 
 
-#####ANCHOR: ASE check structure
+#####ANCHOR ASE check structure
 def check_bad_box_extxyz(
     extxyz_file: str,
     criteria: dict | None = None,

@@ -20,7 +20,7 @@ from ase.io.lammpsrun import read_lammps_dump_text
 from asext.cell import rotate_struct_property
 
 
-#####ANCHOR: Read/Write extxyz file
+#####ANCHOR Read/Write extxyz file
 def read_extxyz(extxyz_file: str, index: int | slice | str = ":") -> list[Atoms]:
     """Read extxyz file. The existing `ase.io.read` returns a single Atoms object if file contains only one frame. This function will return a list of Atoms object.
 
@@ -55,7 +55,7 @@ def write_extxyz(outfile: str, structs: list[Atoms] | Atoms) -> None:
     return
 
 
-#####ANCHOR: Read/Write LAMMPS data file
+#####ANCHOR Read/Write LAMMPS data file
 def read_lmpdump(
     lmpdump_file: str,
     index: int | list[int] | slice = -1,
@@ -133,7 +133,7 @@ def write_lmpdata(
     return
 
 
-#####ANCHOR: Convert formats
+#####ANCHOR Convert formats
 def extxyz2lmpdata(
     extxyz_file: str,
     lmpdata_file: str,
@@ -278,7 +278,7 @@ def lmpdump2extxyz(
 #     return atom_names
 
 
-####ANCHOR: Support functions
+####ANCHOR Support functions
 def _get_symbols_by_types(atoms: Atoms) -> list[str]:
     unique_types, first_idx = np.unique(atoms.arrays["type"], return_index=True)
     symbols_by_type = [atoms.symbols[i] for i in first_idx]

@@ -20,7 +20,7 @@ def download_rawtext(url: str, outfile: str | None = None) -> str | None:
     return text
 
 
-##### ANCHOR: Fetch JS file
+#####ANCHOR Fetch JS file
 def main():
     download_rawtext(
         url="https://raw.githubusercontent.com/thangckt/stuff/refs/heads/js_logVisitor/page_logVisitor.js",
