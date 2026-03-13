@@ -154,8 +154,6 @@ def extxyz2lmpdata(
         - Use `atoms.arrays['type'] = np.array([...])` to set atom types when convert from `extxyz` to `lammpsdata` file.
         - ASE allows to store/write *numeric atom type* when `read/write` LAMMPS `data/dump` file frpm the MR [3847](https://gitlab.com/ase/ase/-/merge_requests/3847). Requires ASE 3.27+.
     """
-    from ase.io.lammpsdata import _get_symbols_by_types
-
     struct = read_extxyz(extxyz_file, index="-1")[0]
 
     write_lmpdata(lmpdata_file, struct, masses=masses, units=units, atom_style=atom_style, **kwargs)
@@ -287,3 +285,7 @@ def lmpdump2extxyz(
 
 
 ####ANCHOR Support functions
+def _get_symbols_by_types(atoms: Atoms) -> list[str]:
+    _unique_types, first_idx = np.unique(atoms.arrays["type"], return_index=True)
+    symbols_by_type = [atoms.symbols[i] for i in first_idx]
+    return symbols_by_type
