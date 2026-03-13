@@ -40,7 +40,7 @@ def read_extxyz(extxyz_file: str, index: int | slice | str = ":") -> list[Atoms]
     struct_list = read(extxyz_file, format="extxyz", index=index)
     if not isinstance(struct_list, list):  # Ensure the result is always a list
         struct_list = [struct_list]
-    return struct_list
+    return struct_list  # ty:ignore[invalid-return-type]
 
 
 def write_extxyz(outfile: str, structs: list[Atoms] | Atoms) -> None:
@@ -75,7 +75,7 @@ def read_lmpdump(
     Returns:
         list: List of Atoms object.
 
-    Note: Original `ase.io.lammpsrun.read_lammps_dump` accepts only `fileobj`, this function accepts `lmpdump_file` as file path.
+    Note: Original [`ase.io.lammpsrun.read_lammps_dump_text`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsrun.read_lammps_dump_text) accepts only `fileobj`, this function accepts `lmpdump_file` as file path.
     """
     with Path(lmpdump_file).open("r") as fileobj:
         struct_list = read_lammps_dump_text(fileobj, index=index, units=units, **kwargs)
@@ -95,11 +95,12 @@ def write_lmpdata(
     write_image_flags: bool = False,
     masses: bool = True,
     velocities: bool = False,
+    atom_type_labels: bool = False,
     units: str = "metal",
     bonds: bool = True,
     atom_style: str = "atomic",
 ) -> None:
-    """Shortcut to `ase.io.lammpsdata.write_lammps_data` function.
+    """Shortcut to [`ase.io.lammpsdata.write_lammps_data`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsdata.write_lammps_data) function.
 
     Args:
         file (str): File to which the output will be written.
@@ -111,21 +112,25 @@ def write_lmpdata(
         write_image_flags (bool): default False. If True, the image flags, i.e., in which images of the periodic simulation box the atoms are, are written.
         masses (bool, optional): Whether the atomic masses are written or not, by default True
         velocities (bool, optional): Whether the atomic velocities are written or not, by default False
+        atom_type_labels (bool, optional): Whether the atom type labels are written or not, by default False
         units (str, optional): `LAMMPS units <https://docs.lammps.org/units.html>`, by default 'metal'
         bonds (bool, optional): Whether the bonds are written or not. Bonds can only be written for atom_style='full', by default True
         atom_style : {'atomic', 'charge', 'full'}, optional. `LAMMPS atom style <https://docs.lammps.org/atom_style.html>`, by default 'atomic'
+
+    Note: The existing `ase.io.lammpsdata.write_lammps_data` function does not support writing file if the parent directory does not exist. This function will overcome this problem.
     """
     Path(file).parent.mkdir(parents=True, exist_ok=True)
     write_lammps_data(
         file,
         atoms,
-        specorder=specorder,  # type: ignore
+        specorder=specorder,
         reduce_cell=reduce_cell,
         force_skew=force_skew,
-        prismobj=prismobj,  # type: ignore
+        prismobj=prismobj,
         write_image_flags=write_image_flags,
         masses=masses,
         velocities=velocities,
+        atom_type_labels=atom_type_labels,
         units=units,
         bonds=bonds,
         atom_style=atom_style,
@@ -146,8 +151,11 @@ def extxyz2lmpdata(
 
     Note:
         - need to save 'original_cell' to able to revert the original orientation of the crystal.
-        - Use `atoms.arrays['type']` to set atom types when convert from `extxyz` to `lammpsdata` file.
+        - Use `atoms.arrays['type'] = np.array([...])` to set atom types when convert from `extxyz` to `lammpsdata` file.
+        - ASE allows to store/write *numeric atom type* when `read/write` LAMMPS `data/dump` file frpm the MR [3847](https://gitlab.com/ase/ase/-/merge_requests/3847). Requires ASE 3.27+.
     """
+    from ase.io.lammpsdata import _get_symbols_by_types
+
     struct = read_extxyz(extxyz_file, index="-1")[0]
 
     write_lmpdata(lmpdata_file, struct, masses=masses, units=units, atom_style=atom_style, **kwargs)
@@ -279,7 +287,3 @@ def lmpdump2extxyz(
 
 
 ####ANCHOR Support functions
-def _get_symbols_by_types(atoms: Atoms) -> list[str]:
-    unique_types, first_idx = np.unique(atoms.arrays["type"], return_index=True)
-    symbols_by_type = [atoms.symbols[i] for i in first_idx]
-    return symbols_by_type
