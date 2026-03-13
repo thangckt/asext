@@ -5,9 +5,9 @@ from typing import cast
 import numpy as np
 
 from ase.atoms import Atoms
+from ase.data import covalent_radii
 from ase.io import read
-
-# from ase import units
+from ase.neighborlist import neighbor_list
 
 
 #####ANCHOR ASE atoms manipulation
@@ -207,3 +207,47 @@ def check_bad_box(
         else:
             raise RuntimeError(f"Unknown criteria: {key}")
     return is_bad
+
+
+def check_atoms_too_close(struct: Atoms) -> None:
+    ### https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py
+    """Check if any atoms are too close to each other.
+
+    Args:
+        struct (Atoms): ASE Atoms object to check.
+
+    Raises:
+        ValueError: If any pair of atoms are closer than the sum of their covalent radii (with a small tolerance).
+
+    Note: This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
+    """
+    radii = covalent_radii[struct.numbers] * 0.01
+    dists = neighbor_list("d", struct, radii)
+    if len(dists):
+        raise ValueError(f"Atoms are too close, e.g. {dists[0]} Å")
+    return
+
+
+def check_atoms_too_close_to_boundary(struct: Atoms, dist: float = 0.2) -> None:
+    """Check if any atoms are too close to the boundary of the box.
+
+    Args:
+        struct (Atoms): ASE Atoms object to check.
+        dist (float): Distance threshold in Å. Atoms closer than this distance to the boundary will raise an error.
+
+    Raises:
+        ValueError: If any atom is closer than the specified distance to the boundary of the box.
+
+    Note: This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
+    """
+    for axis_v, recip_v, pbc in zip(struct.cell, struct.cell.reciprocal(), struct.pbc):
+        if pbc:
+            continue
+        L = np.linalg.norm(axis_v)
+        if L < 1e-12:  # L==0 means no boundary
+            continue
+        spos_a = struct.positions @ recip_v
+        eps = dist / L
+        if (spos_a < eps).any() or (spos_a > 1 - eps).any():
+            raise ValueError("Atoms too close to boundary")
+    return
