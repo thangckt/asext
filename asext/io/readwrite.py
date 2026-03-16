@@ -116,7 +116,8 @@ def write_lmpdata(
         units (str, optional): `LAMMPS units <https://docs.lammps.org/units.html>`, by default 'metal'
         bonds (bool, optional): Whether the bonds are written or not. Bonds can only be written for atom_style='full', by default True
         atom_style : {'atomic', 'charge', 'full'}, optional. `LAMMPS atom style <https://docs.lammps.org/atom_style.html>`, by default 'atomic'
-        # atom_type_labels (bool, optional): Whether the atom type labels are written or not, by default False. This feature is available in ASE 3.28+.
+        **kwargs: Additional arguments passed to `ase.io.lammpsdata.write_lammps_data`
+            - atom_type_labels (bool, optional): Whether the atom type labels are written or not, by default False. This feature is available in ASE 3.28+.
 
     Note: The existing `ase.io.lammpsdata.write_lammps_data` function does not support writing file if the parent directory does not exist. This function will overcome this problem.
     """
@@ -134,8 +135,8 @@ def write_lmpdata(
         units=units,
         bonds=bonds,
         atom_style=atom_style,
-        # atom_type_labels=atom_type_labels,
         **kwargs,
+        # atom_type_labels=atom_type_labels,  # from ASE 3.28+
     )
     return
 
