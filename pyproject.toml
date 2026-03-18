@@ -16,7 +16,7 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
   "Topic :: Scientific/Engineering :: Physics"
 ]
-dependencies = ["ase>=3.27", "numpy"]
+dependencies = ["ase>=3.28", "numpy"]
 dynamic = ["version"]
 
 [project.urls]

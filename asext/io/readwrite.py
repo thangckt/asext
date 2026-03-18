@@ -95,11 +95,11 @@ def write_lmpdata(
     write_image_flags: bool = False,
     masses: bool = True,
     velocities: bool = False,
+    atom_type_labels: bool = False,  # from ASE 3.28+
     units: str = "metal",
     bonds: bool = True,
     atom_style: str = "atomic",
-    **kwargs,
-    # atom_type_labels: bool = False,  # from ASE 3.28+
+    **kwargs,  # avoid breaking due to future updates
 ) -> None:
     """Shortcut to [`ase.io.lammpsdata.write_lammps_data`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsdata.write_lammps_data) function.
 
@@ -113,13 +113,13 @@ def write_lmpdata(
         write_image_flags (bool): default False. If True, the image flags, i.e., in which images of the periodic simulation box the atoms are, are written.
         masses (bool, optional): Whether the atomic masses are written or not, by default True
         velocities (bool, optional): Whether the atomic velocities are written or not, by default False
+        atom_type_labels (bool, optional): Whether the atom type labels are written or not, by default False. This feature is available in ASE 3.28+.
         units (str, optional): `LAMMPS units <https://docs.lammps.org/units.html>`, by default 'metal'
         bonds (bool, optional): Whether the bonds are written or not. Bonds can only be written for atom_style='full', by default True
         atom_style : {'atomic', 'charge', 'full'}, optional. `LAMMPS atom style <https://docs.lammps.org/atom_style.html>`, by default 'atomic'
         **kwargs: Additional arguments passed to `ase.io.lammpsdata.write_lammps_data`
-            - atom_type_labels (bool, optional): Whether the atom type labels are written or not, by default False. This feature is available in ASE 3.28+.
 
-    Note: The existing `ase.io.lammpsdata.write_lammps_data` function does not support writing file if the parent directory does not exist. This function will overcome this problem.
+    Note: The existing [`ase.io.lammpsdata.write_lammps_data`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsdata.write_lammps_data) function does not support writing file if the parent directory does not exist. This function will overcome this problem.
     """
     Path(file).parent.mkdir(parents=True, exist_ok=True)
     write_lammps_data(
@@ -132,11 +132,11 @@ def write_lmpdata(
         write_image_flags=write_image_flags,
         masses=masses,
         velocities=velocities,
+        atom_type_labels=atom_type_labels,
         units=units,
         bonds=bonds,
         atom_style=atom_style,
         **kwargs,
-        # atom_type_labels=atom_type_labels,  # from ASE 3.28+
     )
     return
 
