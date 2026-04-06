@@ -15,7 +15,7 @@ jobs:     # A workflow run is made up of one or more jobs that can run sequentia
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
