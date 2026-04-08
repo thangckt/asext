@@ -40,7 +40,7 @@ def read_extxyz(extxyz_file: str, index: int | slice | str = ":") -> list[Atoms]
     struct_list = read(extxyz_file, format="extxyz", index=index)
     if not isinstance(struct_list, list):  # Ensure the result is always a list
         struct_list = [struct_list]
-    return struct_list  # ty:ignore[invalid-return-type]
+    return struct_list
 
 
 def write_extxyz(outfile: str, structs: list[Atoms] | Atoms) -> None:
