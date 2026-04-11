@@ -1,4 +1,3 @@
-import random
 from collections.abc import Sequence
 from typing import cast
 
@@ -35,15 +34,20 @@ def strain_struct(
     return struct
 
 
-def perturb_struct(struct: Atoms, std_disp: float) -> Atoms:
-    """Perturb the atoms by random displacements.
+def random_displace_struct(struct: Atoms, std_disp: float, seed=42) -> Atoms:
+    """Apply random displacements to atomic positions, using [Atoms.rattle](https://wiki.fysik.dtu.dk/ase/_modules/ase/atoms.html#Atoms.rattle) which eventually calls `np.random.RandomState(seed).normal` to generate random samples from a normal (Gaussian) distribution.
 
-    This method adds random displacements to the atomic positions. [See more](https://wiki.fysik.dtu.dk/ase/_modules/ase/atoms.html#Atoms.rattle)
+    Args:
+        struct (Atoms): ASE Atoms object to perturb.
+        std_disp (float): Standard deviation of the random displacements in Angstrom.
+        seed (int, optional): Seed for the random number generator. Default is 42 for reproducibility.
+
+    Returns:
+        struct (Atoms): New structure with random displacements.
     """
-    struct = struct.copy()
-    seed_number = random.randrange(2**16)
-    struct.rattle(stdev=std_disp, seed=seed_number)
-    return struct
+    new_struct = struct.copy()
+    new_struct.rattle(stdev=std_disp, seed=seed)
+    return new_struct
 
 
 def slice_struct(
