@@ -1,3 +1,5 @@
+"""Module for ASE Atoms structure manipulation and checking."""
+
 from collections.abc import Sequence
 from typing import cast
 
