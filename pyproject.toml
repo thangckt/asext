@@ -23,8 +23,8 @@ dynamic = ["version"]
 Homepage = "https://thangckt.github.io/asext_doc"
 
 [project.optional-dependencies]
+all = ["openbabel-wheel", "ase", "numpy"]
 bare = []
-full = ["openbabel-wheel", "ase", "numpy"]
 test = ["pytest", "pytest-cov", "numpy"]
 
 ## Build system: Hatchling
