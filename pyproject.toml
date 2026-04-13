@@ -24,6 +24,7 @@ Homepage = "https://thangckt.github.io/asext_doc"
 
 [project.optional-dependencies]
 bare = []
+full = ["openbabel-wheel", "ase", "numpy"]
 test = ["pytest", "pytest-cov", "numpy"]
 
 ## Build system: Hatchling
