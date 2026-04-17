@@ -9,9 +9,9 @@ copyright: Copyright &copy; 2022 <a href="https://thangckt.github.io">thangckt</
 #####ANCHOR Theme
 theme:
   name: materialx   # material  materialx  readthedocs  rtd-dropdown  windmill  bootswatch
-  custom_dir: _docs/_overrides
-  logo: 1images/one-note-128-o.png       # one-note-128-o.png     my_picture3x3.jpg    one-note-128-y.png  snake1  monkey
-  favicon: 1images/one-note-128-o.png
+  custom_dir: _docs/_assets/overrides
+  logo: _assets/image/one-note-128-o.png       # one-note-128-o.png     my_picture3x3.jpg    one-note-128-y.png  snake1  monkey
+  favicon: _assets/image/one-note-128-o.png
   highlightjs: true
   features:
     - content.code.annotate
@@ -59,11 +59,11 @@ theme:
 
 #####ANCHOR Extra CSS and JS
 extra_css:
-  - _extra_theme/css/full_width.css
-  - _extra_theme/css/font_size.css
+  - _assets/extra_theme/css/full_width.css
+  - _assets/extra_theme/css/font_size.css
 
 extra_javascript:
-  # - _extra_theme/js/gg_adsense.js
+  # - _assets/extra_theme/js/gg_adsense.js
   - 1thang_js/page_logVisitor.js   # fetch by code before build
 
 #####ANCHOR Customization
