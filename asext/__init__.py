@@ -2,7 +2,7 @@
 
 <img src="https://thangckt.github.io/asext/_assets/image/kde_color_128x128.png" style="float: left; margin-right: 20px" width="120"/>
 
-Developed and maintained by [C.Thang Nguyen](https://thangckt.github.io)
+Developed by [C.Thang Nguyen](https://thangckt.github.io)
 """
 
 from pathlib import Path
