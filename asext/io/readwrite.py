@@ -31,7 +31,7 @@ def read_extxyz(extxyz_file: str, index: int | slice | str = ":") -> list[Atoms]
     Returns:
         list: List of Atoms object.
 
-    Note:
+    Notes:
         - `ase.io.read` returns a single Atoms object or a list of Atoms object, depending on the `index` argument.
             - `index=":"` will always return a list.
             - `index=0` or `index=-1` will return a single Atoms object.
@@ -75,7 +75,7 @@ def read_lmpdump(
     Returns:
         list: List of Atoms object.
 
-    Note: Original [`ase.io.lammpsrun.read_lammps_dump_text`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsrun.read_lammps_dump_text) accepts only `fileobj`, this function accepts `lmpdump_file` as file path.
+    Notes: Original [`ase.io.lammpsrun.read_lammps_dump_text`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsrun.read_lammps_dump_text) accepts only `fileobj`, this function accepts `lmpdump_file` as file path.
     """
     with Path(lmpdump_file).open("r") as fileobj:
         struct_list = read_lammps_dump_text(fileobj, index=index, units=units, **kwargs)
@@ -119,7 +119,7 @@ def write_lmpdata(
         atom_style : {'atomic', 'charge', 'full'}, optional. `LAMMPS atom style <https://docs.lammps.org/atom_style.html>`, by default 'atomic'
         **kwargs: Additional arguments passed to `ase.io.lammpsdata.write_lammps_data`
 
-    Note: The existing [`ase.io.lammpsdata.write_lammps_data`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsdata.write_lammps_data) function does not support writing file if the parent directory does not exist. This function will overcome this problem.
+    Notes: The existing [`ase.io.lammpsdata.write_lammps_data`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsdata.write_lammps_data) function does not support writing file if the parent directory does not exist. This function will overcome this problem.
     """
     Path(file).parent.mkdir(parents=True, exist_ok=True)
     write_lammps_data(
@@ -152,7 +152,7 @@ def extxyz2lmpdata(
 ) -> tuple[list, list]:
     """Convert extxyz file to LAMMPS data file.
 
-    Note:
+    Notes:
         - need to save 'original_cell' to able to revert the original orientation of the crystal.
         - Use `atoms.arrays['type'] = np.array([...])` to set atom types when convert from `extxyz` to `lammpsdata` file.
         - ASE allows to store/write *numeric atom type* when `read/write` LAMMPS `data/dump` file frpm the MR [3847](https://gitlab.com/ase/ase/-/merge_requests/3847). Requires ASE 3.27+.
@@ -277,7 +277,7 @@ def lmpdump2extxyz(
 #     lmpdata_file: str,
 #     atom_style: str = "atomic",
 # ) -> list[str]:
-#     ### Note: The order of atom_names in lammpsdata is computed as: sorted(set(atoms.get_chemical_symbols()))
+#     ### Notes: The order of atom_names in lammpsdata is computed as: sorted(set(atoms.get_chemical_symbols()))
 #     ### REF: https://gitlab.com/ase/ase/-/blob/master/ase/io/lammpsdata.py
 #     """Convert POSCAR file to LAMMPS data file."""
 #     struct = read(poscar_file, format="vasp")

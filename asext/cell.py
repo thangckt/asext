@@ -85,7 +85,7 @@ def make_triangular_cell_extxyz(extxyz_file: str, form: str = "lower") -> None:
 
 #####ANCHOR ASE cell rotation
 class CellTransform:
-    ### Note: There is a [Prism class](https://gitlab.com/ase/ase/-/blob/master/ase/calculators/lammps/coordinatetransform.py?ref_type=heads#L88) which tranforms the cell between LAMMPS and ASE. But It looks complicated, and may used to live update the cell during the simulation.
+    ### Notes: There is a [Prism class](https://gitlab.com/ase/ase/-/blob/master/ase/calculators/lammps/coordinatetransform.py?ref_type=heads#L88) which tranforms the cell between LAMMPS and ASE. But It looks complicated, and may used to live update the cell during the simulation.
     """Tranform the cell and atom properties from `old_cell` to `new_cell` orientations.
 
     The idea is compute a linear transformation that maps the old cell to the new cell. `A = solve(old_cell, new_cell) = old_cell^(-1) new_cell`
@@ -103,7 +103,7 @@ class CellTransform:
         new_cell (np.ndarray): 3x3 matrix represent the new cell.
         pure_rotation (bool): If True, only use the rotation part of the transformation. Defaults to True.
 
-    Note:
+    Notes:
         - `np.linalg.solve(A, B)` solves `AX = B` for `X`. May fail if `A` is singular (square matrix with a determinant of zero, det(A)=0).
         - Rotation matrix is derived from QR decomposition of the cell, following [Prism class](https://gitlab.com/ase/ase/-/blob/master/ase/calculators/lammps/coordinatetransform.py?ref_type=heads#L88)
     """
@@ -197,8 +197,8 @@ def rotate_struct_property(
     Returns:
         ase.Atoms: Atoms object with rotated properties.
 
-    Note:
-        - Important note: `deepcopy(struct)` copies the `struct.calc` object, but `struct.copy()` does not.
+    Notes:
+        - Important : `deepcopy(struct)` copies the `struct.calc` object, but `struct.copy()` does not.
     """
     from ase.stress import full_3x3_to_voigt_6_stress, voigt_6_to_full_3x3_stress
 
@@ -213,7 +213,7 @@ def rotate_struct_property(
     ### Rotate positions and cell
     struct.positions = rot.vectors_forward(struct.positions)
     struct.cell = rot.vectors_forward(old_cell)
-    # note: use `atoms.cell = rot.vectors_backward(atoms.cell.array)` may return non-zero small value (ex: 1e-16) in the cell matrix
+    # Notes: use `atoms.cell = rot.vectors_backward(atoms.cell.array)` may return non-zero small value (ex: 1e-16) in the cell matrix
     if wrap:
         struct.wrap()
 

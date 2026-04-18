@@ -21,7 +21,7 @@ class OpenBabelFFCalculator(Calculator):
         forcefield (str): The name of the [Open Babel force field](https://openbabel.org/docs/Forcefields/Overview.html) to use (e.g. "uff", "mmff94", etc.). Default is "uff".
         kwargs: Additional keyword arguments passed to the ASE's base `Calculator` class.
 
-    Note:
+    Notes:
         - `openbabel` is no longer maintained, and not supported in Python 3.13+. Use [`openbabel-wheel`](https://github.com/njzjz/openbabel-wheel) instead.
         - This calculator extends [the original implementation](https://github.com/otayfuroglu/DeepConf/blob/main/ase_ff.py) with stress calculations.
         - Stress computation is based on the virial formula (Irving & Kirkwood, 1950; Ray & Rahman, 1984).

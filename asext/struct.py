@@ -102,7 +102,7 @@ def set_vacuum(input_struct: Atoms, distances: Sequence[float] = (0.0, 0.0, 0.0)
     Returns:
         struct: A new Atoms object with an expanded cell and centered atoms.
 
-    Note:
+    Notes:
         - `atoms.center()` sets vacuum on both sides of the cell along the specified axis. So the total vacuum is *twice the input value*. This function is different in that, it set total vacuum equal to the input value.
     """
     if len(distances) != 3:
@@ -126,7 +126,7 @@ def check_bad_box_extxyz(
         extxyz_file (str): Path to the extxyz file containing the structure to check.
         criteria (dict, optional): A dictionary of criteria to check
 
-    Return:
+    Returns:
         a file remarking the bad box frames.
     """
     struct = read(extxyz_file, index="-1", format="extxyz")
@@ -141,31 +141,27 @@ def check_bad_box(
     """Check if a simulation box is "bad" based on given criteria.
 
     Args:
-    -----
-    struct : ase.Atoms
-        Atoms object containing the atomic structure.
-    criteria : dict
-        A dictionary of criteria to check, which contains pairs of {'criteria_name': threshold_value}.
-        Available criteria:
-        - `length_ratio`: The ratio of the longest to the shortest cell vector.
-          - Formula: max(|a|, |b|, |c|) / min(|a|, |b|, |c|)
-          - Prevents highly elongated simulation boxes.
-        - `wrap_ratio`: Checks if one cell vector component is excessively wrapped around another.
-          - Formula: [b_x / a_x, c_y / b_y, c_x / a_x]
-          - Prevents excessive skewing.
-        - `tilt_ratio`: Measures tilting of cell vectors relative to their axes.
-          - Formula: [b_x / b_y, c_y / c_z, c_x / c_z]
-          - Avoids excessive tilting that may disrupt periodic boundaries.
+        struct : ase.Atoms
+            Atoms object containing the atomic structure.
+        criteria : dict
+            A dictionary of criteria to check, which contains pairs of {'criteria_name': threshold_value}.
+            Available criteria:
+            - `length_ratio`: The ratio of the longest to the shortest cell vector.
+            - Formula: max(|a|, |b|, |c|) / min(|a|, |b|, |c|)
+            - Prevents highly elongated simulation boxes.
+            - `wrap_ratio`: Checks if one cell vector component is excessively wrapped around another.
+            - Formula: [b_x / a_x, c_y / b_y, c_x / a_x]
+            - Prevents excessive skewing.
+            - `tilt_ratio`: Measures tilting of cell vectors relative to their axes.
+            - Formula: [b_x / b_y, c_y / c_z, c_x / c_z]
+            - Avoids excessive tilting that may disrupt periodic boundaries.
 
     Returns:
-    --------
-    is_bad : bool
-        True if the simulation box violates any of the given criteria, otherwise False.
+        is_bad : bool
+            True if the simulation box violates any of the given criteria, otherwise False.
 
     Raises:
-    -------
-    RuntimeError
-        If an unknown criterion key is provided.
+        RuntimeError: If an unknown criterion key is provided.
     """
     eps = 1.0e-12
 
@@ -225,7 +221,8 @@ def check_atoms_too_close(struct: Atoms) -> None:
     Raises:
         ValueError: If any pair of atoms are closer than the sum of their covalent radii (with a small tolerance).
 
-    Note: This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
+    Notes:
+         This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
     """
     radii = covalent_radii[struct.numbers] * 0.01
     dists = neighbor_list("d", struct, radii)
@@ -244,7 +241,7 @@ def check_atoms_too_close_to_boundary(struct: Atoms, dist: float = 0.2) -> None:
     Raises:
         ValueError: If any atom is closer than the specified distance to the boundary of the box.
 
-    Note: This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
+    Notes: This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
     """
     for axis_v, recip_v, pbc in zip(struct.cell, struct.cell.reciprocal(), struct.pbc):
         if pbc:
