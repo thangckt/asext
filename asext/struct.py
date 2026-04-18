@@ -142,17 +142,16 @@ def check_bad_box(
 
     Args:
         struct (ase.Atoms): Atoms object containing the atomic structure.
-        criteria (dict, optional): A dictionary of criteria to check, which contains pairs of {'criteria_name': threshold_value}.
-            Available criteria:
+        criteria (dict, optional): A dictionary of criteria to check, which contains pairs of {'criteria_name': threshold_value}. Available criteria:
             - `length_ratio`: The ratio of the longest to the shortest cell vector.
-            - Formula: max(|a|, |b|, |c|) / min(|a|, |b|, |c|)
-            - Prevents highly elongated simulation boxes.
+                - Formula: max(|a|, |b|, |c|) / min(|a|, |b|, |c|)
+                - Prevents highly elongated simulation boxes.
             - `wrap_ratio`: Checks if one cell vector component is excessively wrapped around another.
-            - Formula: [b_x / a_x, c_y / b_y, c_x / a_x]
-            - Prevents excessive skewing.
+                - Formula: [b_x / a_x, c_y / b_y, c_x / a_x]
+                - Prevents excessive skewing.
             - `tilt_ratio`: Measures tilting of cell vectors relative to their axes.
-            - Formula: [b_x / b_y, c_y / c_z, c_x / c_z]
-            - Avoids excessive tilting that may disrupt periodic boundaries.
+                - Formula: [b_x / b_y, c_y / c_z, c_x / c_z]
+                - Avoids excessive tilting that may disrupt periodic boundaries.
 
     Returns:
         is_bad (bool): True if the simulation box violates any of the given criteria, otherwise False.
