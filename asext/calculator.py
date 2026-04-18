@@ -28,8 +28,7 @@ class OpenBabelFFCalculator(Calculator):
         - Stress is most meaningful for periodic systems; use with caution for isolated molecules.
 
     References:
-        Irving, J. H.; Kirkwood, J. G. (1950). "The Statistical Mechanical Theory of Transport Processes IV."
-        Journal of Chemical Physics, 18(6), 817-829. https://doi.org/10.1063/1.1747782
+        - Irving, J. H.; Kirkwood, J. G. (1950). "The Statistical Mechanical Theory of Transport Processes IV." Journal of Chemical Physics, 18(6), 817-829. https://doi.org/10.1063/1.1747782
     """
 
     implemented_properties = ("energy", "forces", "stress")

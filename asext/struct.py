@@ -141,10 +141,8 @@ def check_bad_box(
     """Check if a simulation box is "bad" based on given criteria.
 
     Args:
-        struct : ase.Atoms
-            Atoms object containing the atomic structure.
-        criteria : dict
-            A dictionary of criteria to check, which contains pairs of {'criteria_name': threshold_value}.
+        struct (ase.Atoms): Atoms object containing the atomic structure.
+        criteria (dict, optional): A dictionary of criteria to check, which contains pairs of {'criteria_name': threshold_value}.
             Available criteria:
             - `length_ratio`: The ratio of the longest to the shortest cell vector.
             - Formula: max(|a|, |b|, |c|) / min(|a|, |b|, |c|)
@@ -157,8 +155,7 @@ def check_bad_box(
             - Avoids excessive tilting that may disrupt periodic boundaries.
 
     Returns:
-        is_bad : bool
-            True if the simulation box violates any of the given criteria, otherwise False.
+        is_bad (bool): True if the simulation box violates any of the given criteria, otherwise False.
 
     Raises:
         RuntimeError: If an unknown criterion key is provided.
@@ -222,7 +219,7 @@ def check_atoms_too_close(struct: Atoms) -> None:
         ValueError: If any pair of atoms are closer than the sum of their covalent radii (with a small tolerance).
 
     Notes:
-         This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
+        This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
     """
     radii = covalent_radii[struct.numbers] * 0.01
     dists = neighbor_list("d", struct, radii)
@@ -241,7 +238,8 @@ def check_atoms_too_close_to_boundary(struct: Atoms, dist: float = 0.2) -> None:
     Raises:
         ValueError: If any atom is closer than the specified distance to the boundary of the box.
 
-    Notes: This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
+    Notes:
+        This function is adapted from [gpaw](https://gitlab.com/gpaw/gpaw/-/blob/master/gpaw/utilities/__init__.py)
     """
     for axis_v, recip_v, pbc in zip(struct.cell, struct.cell.reciprocal(), struct.pbc):
         if pbc:

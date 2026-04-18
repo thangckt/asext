@@ -75,7 +75,8 @@ def read_lmpdump(
     Returns:
         list: List of Atoms object.
 
-    Notes: Original [`ase.io.lammpsrun.read_lammps_dump_text`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsrun.read_lammps_dump_text) accepts only `fileobj`, this function accepts `lmpdump_file` as file path.
+    Notes:
+        Original [`ase.io.lammpsrun.read_lammps_dump_text`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsrun.read_lammps_dump_text) accepts only `fileobj`, this function accepts `lmpdump_file` as file path.
     """
     with Path(lmpdump_file).open("r") as fileobj:
         struct_list = read_lammps_dump_text(fileobj, index=index, units=units, **kwargs)
@@ -119,7 +120,8 @@ def write_lmpdata(
         atom_style : {'atomic', 'charge', 'full'}, optional. `LAMMPS atom style <https://docs.lammps.org/atom_style.html>`, by default 'atomic'
         **kwargs: Additional arguments passed to `ase.io.lammpsdata.write_lammps_data`
 
-    Notes: The existing [`ase.io.lammpsdata.write_lammps_data`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsdata.write_lammps_data) function does not support writing file if the parent directory does not exist. This function will overcome this problem.
+    Notes:
+        The existing [`ase.io.lammpsdata.write_lammps_data`](https://ase-lib.org/ase/io/formatoptions.html#ase.io.lammpsdata.write_lammps_data) function does not support writing file if the parent directory does not exist. This function will overcome this problem.
     """
     Path(file).parent.mkdir(parents=True, exist_ok=True)
     write_lammps_data(
