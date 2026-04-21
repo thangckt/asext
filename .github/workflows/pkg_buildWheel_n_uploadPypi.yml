@@ -8,6 +8,7 @@ on:
     types: [created]
   workflow_dispatch:
 
+
 jobs:
   build_wheel:
     name: Build wheel file
@@ -17,11 +18,13 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout main
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Fetch full history and tags
 
-      - uses: actions/setup-python@v6
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
 
