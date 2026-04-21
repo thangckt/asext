@@ -38,20 +38,25 @@ jobs:
 
       - name: Create version manually for setuptools-scm
         run: |
-          LATEST_TAG=$(git describe --tags "$(git rev-list --tags --max-count=1)" | sed 's/^v//')
-          LATEST_TAG_COMMIT=$(git rev-list --tags --max-count=1)
-          NUM_COMMITS=$(git rev-list ${LATEST_TAG_COMMIT}..HEAD --count --all)
-          if [ "$NUM_COMMITS" -gt 0 ]; then
-              # Split tag into array and increment last part
-              IFS='.' read -r -a PARTS <<< "$LATEST_TAG"
-              LAST_INDEX=$((${#PARTS[@]} - 1))
-              PARTS[$LAST_INDEX]=$((PARTS[$LAST_INDEX] + 1))
-
-              # Join back into version string
-              NEXT_TAG=$(IFS='.'; echo "${PARTS[*]}")
-              SETUPTOOLS_SCM_PRETEND_VERSION="${NEXT_TAG}.dev${NUM_COMMITS}"
+          # For release events, use the release tag directly without .dev suffix
+          if [ "${{ github.event_name }}" == "release" ]; then
+              SETUPTOOLS_SCM_PRETEND_VERSION=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
           else
-              SETUPTOOLS_SCM_PRETEND_VERSION="$LATEST_TAG"
+              LATEST_TAG=$(git describe --tags "$(git rev-list --tags --max-count=1)" | sed 's/^v//')
+              LATEST_TAG_COMMIT=$(git rev-list --tags --max-count=1)
+              NUM_COMMITS=$(git rev-list ${LATEST_TAG_COMMIT}..HEAD --count --all)
+              if [ "$NUM_COMMITS" -gt 0 ]; then
+                  # Split tag into array and increment last part
+                  IFS='.' read -r -a PARTS <<< "$LATEST_TAG"
+                  LAST_INDEX=$((${#PARTS[@]} - 1))
+                  PARTS[$LAST_INDEX]=$((PARTS[$LAST_INDEX] + 1))
+
+                  # Join back into version string
+                  NEXT_TAG=$(IFS='.'; echo "${PARTS[*]}")
+                  SETUPTOOLS_SCM_PRETEND_VERSION="${NEXT_TAG}.dev${NUM_COMMITS}"
+              else
+                  SETUPTOOLS_SCM_PRETEND_VERSION="$LATEST_TAG"
+              fi
           fi
           echo "SETUPTOOLS_SCM_PRETEND_VERSION=$SETUPTOOLS_SCM_PRETEND_VERSION" >> $GITHUB_ENV
 
