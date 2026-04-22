@@ -10,8 +10,8 @@ copyright: Copyright &copy; 2022 <a href="https://thangckt.github.io">thangckt</
 theme:
   name: materialx   # material  materialx  readthedocs  rtd-dropdown  windmill  bootswatch
   custom_dir: _docs/_assets/overrides
-  logo: _assets/image/one-note-128-o.png       # one-note-128-o.png     my_picture3x3.jpg    one-note-128-y.png  snake1  monkey
-  favicon: _assets/image/one-note-128-o.png
+  logo: _assets/image/logo_alff.svg       # one-note-128-o.png     my_picture3x3.jpg    one-note-128-y.png  snake1  monkey
+  favicon: _assets/image/logo_alff.svg
   highlightjs: true
   features:
     - content.code.annotate
