@@ -207,8 +207,8 @@ plugins:
 #####ANCHOR Site content
 nav:
   - home: http://thangckt.github.io
-  - alff: http://thangckt.github.io/alff_doc
-  - thkit: http://thangckt.github.io/thkit_doc
+  - alff: http://thangckt.github.io/alff
+  - thkit: http://thangckt.github.io/thkit
   - asext:
       - About: index.md
       - API reference:
@@ -216,6 +216,6 @@ nav:
       # - Changelog: CHANGELOG.md
       - Contact author: http://thangckt.github.io/email/
 
-  - thmd: http://thangckt.github.io/thmd_doc
-  - thml: http://thangckt.github.io/thml_doc
+  - thmd: http://thangckt.github.io/thmd
+  - thml: http://thangckt.github.io/thml
   - molbuilder: http://thangckt.github.io/molbuilder
