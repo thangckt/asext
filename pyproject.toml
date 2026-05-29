@@ -20,7 +20,7 @@ dependencies = ["ase>=3.28", "numpy"]
 dynamic = ["version"]
 
 [project.urls]
-Homepage = "https://thangckt.github.io/asext_doc"
+Homepage = "https://thangckt.github.io/asext"
 
 [project.optional-dependencies]
 all = ["openbabel>=3.2.0", "ase", "numpy"]
