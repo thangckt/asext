@@ -20,6 +20,6 @@ jobs:
       - name: "TODO to Issue"
         uses: "alstr/todo-to-issue-action@v5"
         with:
-          PROJECT: "user/thangckt/clip"
+          PROJECT: "user/thangckt/clff"
           PROJECTS_SECRET: "${{ secrets.PROJECTS_SECRET }}"
           # AUTO_ASSIGN: "true"
