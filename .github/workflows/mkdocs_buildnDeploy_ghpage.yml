@@ -3,7 +3,7 @@ name: MkDocs GitHub Pages Build & Deploy
 on:
   workflow_dispatch:
   push:
-    branches: [main, dev]
+    branches: [disable] # [main, dev]
     paths-ignore:
       - "1devtool/**"
       - "*.egg-info/**"
