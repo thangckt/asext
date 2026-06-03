@@ -3,6 +3,8 @@
 <img src="./_assets/image/logo_clff.svg" style="float: left; margin-right: 20px" width="120"/>
 
 Developed by [C.Thang Nguyen](https://thangckt.github.io)
+
+This package was originally developed as part of the [CLFF](https://thangckt.github.io/clff/) project.
 """
 
 from pathlib import Path
