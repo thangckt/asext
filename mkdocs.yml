@@ -64,7 +64,6 @@ extra_css:
 
 extra_javascript:
   # - _assets/extra_theme/js/gg_adsense.js
-  - 1thang_js/page_logVisitor.js   # fetch by code before build
 
 #####ANCHOR Customization
 extra:
